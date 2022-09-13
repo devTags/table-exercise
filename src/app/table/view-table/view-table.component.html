@@ -1,0 +1,75 @@
+<div class="card-table">
+  <div class="sample-wrapper">
+
+      <igx-input-group type="search" class="offset">
+        <igx-prefix>
+            <igx-icon *ngIf="searchText.length === 0">search</igx-icon>
+            <igx-icon *ngIf="searchText.length > 0" (click)="clearSearch()">clear</igx-icon>
+        </igx-prefix>
+
+        <input #search1 id="search1" igxInput placeholder="Search" [(ngModel)]="searchText" (ngModelChange)="grid.findNext(searchText, caseSensitive, exactMatch)"
+            (keydown)="searchKeyDown($event)" />
+
+        <igx-suffix *ngIf="searchText.length > 0">
+            <div class="resultsText" *ngIf="grid.lastSearchInfo">
+                <span *ngIf="grid.lastSearchInfo.matchInfoCache.length > 0">
+                    {{ grid.lastSearchInfo.activeMatchIndex + 1 }} of {{ grid.lastSearchInfo.matchInfoCache.length }}
+                    results
+                </span>
+                <span *ngIf="grid.lastSearchInfo.matchInfoCache.length === 0">
+                    No results
+                </span>
+            </div>
+            <div class="chips">
+                <igx-chips-area>
+                    <igx-chip (click)="updateSearch()" [color]="caseSensitive? 'lightgrey' : 'rgba(0, 0, 0, .04)'">
+                        <span>Case Sensitive</span>
+                    </igx-chip>
+                    <igx-chip (click)="updateExactSearch()" [color]="exactMatch? 'lightgrey' : 'rgba(0, 0, 0, .04)'">
+                        <span>Exact Match</span>
+                    </igx-chip>
+                </igx-chips-area>
+            </div>
+            <div class="searchButtons">
+                <button igxButton="icon" igxRipple [igxRippleCentered]="true" (click)="grid.findPrev(searchText, caseSensitive, exactMatch)">
+                    <igx-icon family="material">navigate_before</igx-icon>
+                </button>
+                <button igxButton="icon" igxRipple [igxRippleCentered]="true" (click)="grid.findNext(searchText, caseSensitive, exactMatch)">
+                    <igx-icon family="material">navigate_next</igx-icon>
+                </button>
+            </div>
+        </igx-suffix>
+    </igx-input-group>
+
+
+
+
+    <igx-grid igxPreventDocumentScroll #grid1 id="grid1" [data]="usersTable" [primaryKey]="'id'" width="100%" height="500px" [rowEditable]="true" [allowFiltering]="true" (rowAdded)="rowAdded($event)" 
+    (rowDeleted)="rowDeleted($event)"
+    (rowEditDone)="rowEditDone($event)">>
+      
+      <igx-paginator [perPage]="10"></igx-paginator>
+
+
+        <igx-column field="id" header="User ID"></igx-column>
+        <igx-column field="name" header="Name" [dataType]="'string'"></igx-column>
+        <igx-column field="jobTitle" header="Job Title" [dataType]="'string'"></igx-column>
+        <igx-column field="email" header="Email" [dataType]="'string'"></igx-column>
+        <igx-column field="phone" header="Phone" [dataType]="'string'">
+            <!--The following template can be omitted (grid handles this internally) but it is here as an example of custom cell editor.-->
+            <ng-template igxCellEditor let-cell="cell">
+                <igx-input-group>
+                    <input igxInput [igxFocus]='true' name="units" [(ngModel)]="cell.editValue" style="color: black" />
+                </igx-input-group>
+            </ng-template>
+        </igx-column>
+        <igx-column field="createdAt" header="Created Date" [dataType]="'date'"></igx-column>
+        <!-- <igx-column field="Discontinued" header="Discontinued" [dataType]="'boolean'"></igx-column> -->
+
+        <igx-action-strip #actionstrip>
+          <igx-grid-editing-actions [editRow]="true" [addRow]="true" [deleteRow]="true"></igx-grid-editing-actions>
+      </igx-action-strip>
+    </igx-grid>
+  </div>
+  
+</div>
