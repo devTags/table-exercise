@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import {IRowDataEventArgs, IGridEditDoneEventArgs} from 'igniteui-angular';
 import { IgxGridComponent} from 'igniteui-angular';
+import { UserTable } from 'src/app/interfaces';
+
+
 
 @Component({
   selector: 'app-view-table',
@@ -15,7 +18,9 @@ export class ViewTableComponent implements OnInit {
   public searchText = '';
   public caseSensitive = false;
   public exactMatch = false;
-  usersTable: any = [];
+  usersTable: UserTable[] = [];
+
+  dataTable: [] = []
 
   constructor(private _ds: DataService) { }
 
@@ -23,28 +28,34 @@ export class ViewTableComponent implements OnInit {
     this.getData()
   }
 
-  async getData() {
-  this._ds.get('getDataTable')?.subscribe({
-    next: (v) => this.usersTable = v,
-    error: (e) => console.error(e),
-    complete: () => console.info('complete') 
-    })
+  async getData(){
+
+    await firstValueFrom(this._ds.get('getDataTable'))?.then((res: UserTable[]) => {
+
+    this.usersTable = res;
+    console.log(this.usersTable[0]['email'])
+
+   }, err => {
+
+    console.log(err)
+
+   })
   }
 
 
   async rowAdded(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.post('getDataTable', event.data)).then((res :any) => {
+    await firstValueFrom(this._ds.post('getDataTable', event.data)).then((res: UserTable[]) => {
       
       console.log(res)
      }, err => {
   
       console.log(err)
   
-     })
+     }) 
   }
 
   async rowDeleted(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.delete(`getDataTable/${event.data.id}`)).then((res :any) => {
+    await firstValueFrom(this._ds.delete(`getDataTable/${event.data.id}`)).then((res: UserTable[]) => {
       
       console.log(res)
      }, err => {
@@ -57,8 +68,8 @@ export class ViewTableComponent implements OnInit {
 
   async rowEditDone(event: IGridEditDoneEventArgs){
 
-    await firstValueFrom(this._ds.put('getDataTable', event.rowID, event.newValue)).then((res :any) => {
-      
+    await firstValueFrom(this._ds.put('getDataTable', event.rowID, event.newValue)).then((res: UserTable[]) => {
+       
       this.getData()
      }, err => {
   
@@ -75,7 +86,7 @@ export class ViewTableComponent implements OnInit {
       this.grid.clearSearch();
   }
 
-  public searchKeyDown(ev: any) {
+  public searchKeyDown(ev: KeyboardEvent):void {
       if (ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
           ev.preventDefault();
           this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
