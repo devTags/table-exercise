@@ -41,10 +41,7 @@
         </igx-suffix>
     </igx-input-group>
 
-
-
-
-    <igx-grid igxPreventDocumentScroll #grid1 id="grid1" [data]="usersTable" [primaryKey]="'id'" width="100%" height="500px" [rowEditable]="true" [allowFiltering]="true" (rowAdded)="rowAdded($event)" 
+    <igx-grid igxPreventDocumentScroll #grid1 id="grid1" [data]="usersTable" [primaryKey]="'id'" width="100%" height="auto" [rowEditable]="true" [allowFiltering]="true" (rowAdded)="rowAdded($event)" 
     (rowDeleted)="rowDeleted($event)"
     (rowEditDone)="rowEditDone($event)">>
       
