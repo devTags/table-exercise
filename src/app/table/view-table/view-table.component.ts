@@ -15,12 +15,10 @@ import { UserTable } from 'src/app/interfaces';
 export class ViewTableComponent implements OnInit {
   @ViewChild('grid1', { static: true }) public grid!: IgxGridComponent;
 
-  public searchText = '';
-  public caseSensitive = false;
-  public exactMatch = false;
+  public searchText: string = '';
+  public caseSensitive: boolean = false;
+  public exactMatch: boolean = false;
   usersTable: UserTable[] = [];
-
-  dataTable: [] = []
 
   constructor(private _ds: DataService) { }
 
@@ -30,7 +28,7 @@ export class ViewTableComponent implements OnInit {
 
   async getData(){
 
-    await firstValueFrom(this._ds.get('getDataTable'))?.then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.getUsers())?.then((res: UserTable[]) => {
 
     this.usersTable = res;
     console.log(this.usersTable[0]['email'])
@@ -44,7 +42,7 @@ export class ViewTableComponent implements OnInit {
 
 
   async rowAdded(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.post('getDataTable', event.data)).then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.postUsers('', event.data)).then((res: UserTable[]) => {
       
       console.log(res)
      }, err => {
@@ -55,7 +53,7 @@ export class ViewTableComponent implements OnInit {
   }
 
   async rowDeleted(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.delete(`getDataTable/${event.data.id}`)).then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.deleteUsers(event.data.id)).then((res: UserTable[]) => {
       
       console.log(res)
      }, err => {
@@ -68,7 +66,7 @@ export class ViewTableComponent implements OnInit {
 
   async rowEditDone(event: IGridEditDoneEventArgs){
 
-    await firstValueFrom(this._ds.put('getDataTable', event.rowID, event.newValue)).then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.putUsers('', event.rowID, event.newValue)).then((res: UserTable[]) => {
        
       this.getData()
      }, err => {
