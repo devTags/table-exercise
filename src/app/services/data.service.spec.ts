@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { DataService } from './data.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpResponse } from '@angular/common/http';
 import { UserTable } from '../interfaces';
 
 describe('DataService', () => {
@@ -58,7 +58,7 @@ describe('DataService', () => {
   });
 
   it('should add users from API via POST', () => {
-      const dummyUser: UserTable[] = [{
+      const newUser: UserTable[] = [{
         "createdAt": "",
         "name": "Donald Trump",
         "address": "505 Rey Street",
@@ -69,7 +69,55 @@ describe('DataService', () => {
         "id": ""
       }];
 
-      service.addUsers(dummyUser)
-  })
+      service.addUsers(newUser).subscribe(user => {
+        expect(user).toEqual(newUser, 'should return the user');
+      })
+
+      const request = httpMock.expectOne(`${service.baseUrl}getDataTable`);
+      expect(request.request.method).toEqual('POST');
+      expect(request.request.body).toEqual(newUser);
+
+      const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
+      request.event(expectedResponse);
+    })
+
+  //   it('should update users from API via PUT', () => {
+  //     const newUser: UserTable[] = [{
+  //       "createdAt": "",
+  //       "name": "Donald Trump",
+  //       "address": "505 Rey Street",
+  //       "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
+  //       "email": "Carole_Crooks76@example.com",
+  //       "phone": "(821) 885-8760 x87741",
+  //       "jobTitle": "Dynamic Research Officer",
+  //       "id": ""
+  //     }];
+
+  //     service.putUsers(2,newUser).subscribe(user => {
+  //       expect(user).toEqual(newUser, 'should return the user');
+  //     })
+
+  //     const request = httpMock.expectOne(`${service.baseUrl}getDataTable/`+ 2);
+  //     expect(request.request.method).toEqual('PUT');
+  //     expect(request.request.body).toEqual(newUser);
+
+  //     const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
+  //     request.event(expectedResponse);
+  //   })
+
+
+  //   it('should delete users from API via DELETE', () => {
+    
+  //     service.deleteUsers(10).subscribe(user => {
+        
+  //     })
+
+   
+  //     const request = httpMock.expectOne(`${service.baseUrl}getDataTable`);
+
+  //     expect(request.request.method).toBe('DELETE');
+  
+  //     request.flush(null)
+  //   })
 
 });
