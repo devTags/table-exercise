@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { UserTable } from '../interfaces';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { UserTable } from '../interfaces';
 })
 export class DataService {
 
-  baseUrl: string = 'https://631ee3db22cefb1edc3ced68.mockapi.io/';
+  baseUrl = environment.baseUrl;
 
   constructor(private _http: HttpClient) { }
 
@@ -18,11 +19,11 @@ export class DataService {
 
   }
 
-  public postUsers(endpoint: string, userData: UserTable[]){
+  public addUsers(userData: UserTable[]){
     return this._http.post<UserTable[]>(this.baseUrl + 'getDataTable', userData)
   }
 
-  public putUsers(endpoint: string, id: number, userData: UserTable[]) {
+  public putUsers(id: number, userData: UserTable[]) {
     return this._http.put<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`, userData)
 
   }
