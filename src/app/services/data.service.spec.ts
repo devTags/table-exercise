@@ -6,7 +6,8 @@ import { UserTable } from '../interfaces';
 
 describe('DataService', () => {
   let service: DataService;
-  let httpMock: HttpTestingController
+  let httpMock: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule, HttpClientTestingModule],
@@ -55,5 +56,20 @@ describe('DataService', () => {
 
     request.flush(dummyUsers)
   });
+
+  it('should add users from API via POST', () => {
+      const dummyUser: UserTable[] = [{
+        "createdAt": "",
+        "name": "Donald Trump",
+        "address": "505 Rey Street",
+        "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
+        "email": "Carole_Crooks76@example.com",
+        "phone": "(821) 885-8760 x87741",
+        "jobTitle": "Dynamic Research Officer",
+        "id": ""
+      }];
+
+      service.addUsers(dummyUser)
+  })
 
 });
