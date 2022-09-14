@@ -13,22 +13,22 @@ export class DataService {
 
 
 
-  public  get(endpoint: string){
-    return this._http.get<UserTable[]>(this.baseUrl + endpoint);
+  public  getUsers(){
+    return this._http.get<UserTable[]>(this.baseUrl + 'getDataTable' );
 
   }
 
-  public post(endpoint: string, userData: UserTable[]){
-    return this._http.post<UserTable[]>(this.baseUrl + endpoint, userData)
+  public postUsers(endpoint: string, userData: UserTable[]){
+    return this._http.post<UserTable[]>(this.baseUrl + 'getDataTable', userData)
   }
 
-  public put(endpoint: string, id: number, userData: UserTable[]) {
-    return this._http.put<UserTable[]>(`${this.baseUrl}${endpoint}/${id}`, userData)
+  public putUsers(endpoint: string, id: number, userData: UserTable[]) {
+    return this._http.put<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`, userData)
 
   }
 
-  public delete(endpoint: string){
-    return this._http.delete<UserTable[]>(this.baseUrl + endpoint)
+  public deleteUsers(id: number){
+    return this._http.delete<UserTable[]>(`${this.baseUrl}/${id}`)
   }
 
 }
