@@ -42,7 +42,7 @@ export class ViewTableComponent implements OnInit {
 
 
   async rowAdded(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.postUsers('', event.data)).then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.addUsers(event.data)).then((res: UserTable[]) => {
       
       console.log(res)
      }, err => {
@@ -66,7 +66,7 @@ export class ViewTableComponent implements OnInit {
 
   async rowEditDone(event: IGridEditDoneEventArgs){
 
-    await firstValueFrom(this._ds.putUsers('', event.rowID, event.newValue)).then((res: UserTable[]) => {
+    await firstValueFrom(this._ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => {
        
       this.getData()
      }, err => {
