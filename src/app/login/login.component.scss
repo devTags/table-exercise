@@ -1,0 +1,41 @@
+
+.login-wrapper{
+    display: flex;
+    align-items: center;
+    padding-top: 50px !important;
+    justify-content: center;
+}
+
+img{
+    height: 550px;
+}
+.input-email{
+    margin-bottom: 2rem;
+}
+
+input{ 
+    padding: 12px;
+    border: 1px solid rgb(182, 182, 182);
+    box-sizing: border-box;
+    transition: 0.3s;
+    width: 100% !important;
+    
+    &:hover,&:focus-within{
+        outline: 1px solid #555;
+        box-shadow: 0px 0px 5px #555;
+
+    }
+}
+
+
+:host::ng-deep.p-button{
+    display: flex;
+    margin-bottom:  1rem;
+    width: 500px !important;
+    justify-content: center;
+
+}
+:host::ng-deep.p-card{
+    height: 300px;
+
+}

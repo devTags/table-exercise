@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService } from './services/data.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,9 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent {
   title = 'table-exercise';
+  constructor(private primengConfig: PrimeNGConfig) {}
 
- 
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 }

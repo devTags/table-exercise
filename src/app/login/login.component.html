@@ -1,0 +1,29 @@
+<div class="login-wrapper">
+    <div class="image-holder">
+        <img src="../../assets//undraw_secure_login_pdn4.svg" alt="">
+    </div>
+    <form action="" [formGroup]="loginForm" (ngSubmit)="signin()" ngNativeValidate>
+        <p-card header="Login Form">
+                <div class="input-email">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input id="float-input" formControlName="email" pInputText  type="text" > 
+                    </div>
+                </div>
+
+                <div class="input-password">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                        <input id="float-input" formControlName="password" pInputText  type="password" > 
+                    </div>
+                </div>
+
+                
+        
+            <ng-template pTemplate="footer">
+                <button pButton type="submit" label="Login" class="p-button-submit"></button>
+            </ng-template>
+        </p-card>
+    </form>
+
+</div>
