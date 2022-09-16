@@ -4,6 +4,7 @@
     </div>
     <form action="" [formGroup]="loginForm" (ngSubmit)="signin()" ngNativeValidate>
         <p-card header="Login Form">
+            
                 <div class="input-email">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -22,7 +23,10 @@
         
             <ng-template pTemplate="footer">
                 <button pButton type="submit" label="Login" class="p-button-submit"></button>
+                <p-progressBar mode="indeterminate" *ngIf="isLoggedin" [style]="{'height': '6px'}"></p-progressBar>
+
             </ng-template>
+
         </p-card>
     </form>
 

@@ -26,6 +26,7 @@ describe('DataService', () => {
   it('should retrive users from API via GET', () => {
     const dummyUsers: UserTable[] = [{
       "createdAt": "2023-09-11T16:00:00.000Z",
+      "password": "",
       "name": "Mr. Nadine Klocko",
       "address": "05212 Crist Lights",
       "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/642.jpg",
@@ -36,6 +37,7 @@ describe('DataService', () => {
       },
       {
       "createdAt": "2022-09-11T08:58:16.654Z",
+      "password": "",
       "name": "Bessie Spencer",
       "address": "505 Rey Street",
       "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
@@ -45,7 +47,7 @@ describe('DataService', () => {
       "id": "3"
       }];
 
-      service.getUsers().subscribe(users => {
+      service.getAllUsers().subscribe(users => {
         expect(users.length).toBe(2);
         expect(users).toEqual(dummyUsers);
       })
@@ -60,6 +62,7 @@ describe('DataService', () => {
   it('should add users from API via POST', () => {
       const newUser: UserTable[] = [{
         "createdAt": "",
+        "password": "",
         "name": "Donald Trump",
         "address": "505 Rey Street",
         "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
