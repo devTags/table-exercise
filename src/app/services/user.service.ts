@@ -16,7 +16,5 @@ export class UserService {
 
   constructor() { }
 
-  setUser(account: UserTable): void {
-    _.assign(this, account)
-  }
+
 }

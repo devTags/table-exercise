@@ -20,41 +20,51 @@ export class LoginComponent implements OnInit {
   isLoggedin: boolean = false;
   usersTable: UserTable[] = [];
 
-  constructor(private fb: FormBuilder, private ds: DataService, private router: Router) { }
+  constructor(public fb: FormBuilder, public ds: DataService, public router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: new FormControl('', Validators.email),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.minLength(2)),
     })
+  }
+
+  async getUsers(): Promise<void> {
+    await firstValueFrom(this.ds.getAllUsers()).then((res: UserTable[]) =>this.filterAccounts(res));
   }
 
   async signin(): Promise<void> {
     try {
       if(!this.loginForm.valid)
-      
         throw new Error('Form is not valid!!');
-      await firstValueFrom(this.ds.getAllUsers()).then((res: UserTable[]) =>this.filterAccounts(res));
+        this.getUsers();
     } catch (error: any) {
       alert(error.message)
     }
   }
+
+
  /**
   * @param res 
   * @param _email 
   * @param _password 
   */
-  private filterAccounts(res: UserTable[]) {
+  public filterAccounts(res: UserTable[]) {
     this.isLoggedin = true;
     const _email = this.loginForm.get('email')?.value;
     const _password = this.loginForm.get('password')?.value;
     const account = _.filter(res, (e) => (e.email === _email && e.password === _password));
-    (account && _.size(account)) ? this.pageTransit(account) : alert("Account not Found!");
+
+    if(account && _.size(account)){
+      this.pageTransit(account)
+    }else {
+      alert("Account not Found!")
+    }
   }
   /** 
    * @param account 
    */
-  private pageTransit(account: UserTable[]) {
+  public pageTransit(account: UserTable[]) {
     // this._us.setUser(account[0]);
     setTimeout(() =>{
       this.isLoggedin = false;
