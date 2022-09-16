@@ -7,14 +7,19 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button'
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import {AvatarModule} from 'primeng/avatar';
 
 // Imported syncfusion Grid module from grids package
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ChartModule } from '@syncfusion/ej2-angular-charts';
 
-import { CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
-  SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService,AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
+import {
+  CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+  SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService, AccumulationChartModule
+} from '@syncfusion/ej2-angular-charts';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
 
 // Ignite UI
 import {
@@ -30,13 +35,13 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableComponent } from './table/table.component';
-import { ViewTableComponent } from './table/view-table/view-table.component';
+import { TableComponent } from './pages/table/table.component';
+import { ViewTableComponent } from './pages/table/view-table/view-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -70,10 +75,13 @@ import { AnalyticsComponent } from './analytics/analytics.component';
     PasswordModule,
     InputTextModule,
     AccumulationChartModule,
-    ChartModule
-    
+    ChartModule,
+    ProgressBarModule,
+    ToastModule,
+    AvatarModule
+
   ],
-  providers: [CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+  providers: [DateTimeService, CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
     SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService],
   entryComponents: [],
   schemas: [],

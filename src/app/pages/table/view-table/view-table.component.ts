@@ -5,6 +5,7 @@ import { IRowDataEventArgs, IGridEditDoneEventArgs } from 'igniteui-angular';
 import { IgxGridComponent } from 'igniteui-angular';
 import { UserTable } from 'src/app/interfaces';
 import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -19,56 +20,60 @@ export class ViewTableComponent implements OnInit {
   public searchText: string = '';
   public caseSensitive: boolean = false;
   public exactMatch: boolean = false;
+  public users: string = '';
   usersTable: UserTable[] = [];
 
-  constructor(private _ds: DataService) { }
+  constructor(private ds: DataService) { }
 
   ngOnInit(): void {
-    this.getData()
+    this.getAllUserData()
   }
 
-  async getData(): Promise<void> {
-    await firstValueFrom(this._ds.getUsers()).then((res: UserTable[]) => ( this.usersTable = res ), console.error);
+
+  async getAllUserData(): Promise<void> {
+    await firstValueFrom(this.ds.getAllUsers()).then((res: UserTable[]) => {
+      this.usersTable = res;
+    }, console.error);
   }
 
 
   async rowAdded(event: IRowDataEventArgs): Promise<void> {
-    await firstValueFrom(this._ds.addUsers(event.data)).then((res: UserTable[]) => console.log , console.error);
+    await firstValueFrom(this.ds.addUsers(event.data)).then((res: UserTable[]) => console.log, console.error);
   }
 
   // async rowDeleted(event: IRowDataEventArgs): Promise<void> {
-  //   await firstValueFrom(this._ds.deleteUsers(event.data.id)).then((res: UserTable[]) => console.log , console.error);
+  //   await firstValueFrom(this.ds.deleteUsers(event.data.id)).then((res: UserTable[]) => console.log , console.error);
   // }
 
   // async rowEditDone(event: IGridEditDoneEventArgs): Promise<void> {
 
-  //   await firstValueFrom(this._ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => this.getData(), console.error);
+  //   await firstValueFrom(this.ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => this.getData(), console.error);
 
   // }
 
   public clearSearch(): void {
-    this.searchText = ''; 
-    this.grid.clearSearch();
+    this.searchText = '';
+    // this.grid.clearSearch();
   }
 
   public searchKeyDown(ev: KeyboardEvent): void {
 
-    if (!_.indexOf(['Enter','ArrowDown','ArrowRight'],  ev.key)) {
-      ev.preventDefault();
-      this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
-    } else if (!_.indexOf(['ArrowUp','ArrowLeft'],  ev.key)) {
-      ev.preventDefault();
-      this.grid.findPrev(this.searchText, this.caseSensitive, this.exactMatch);
+    if (!_.indexOf(['Enter', 'ArrowDown', 'ArrowRight'], ev.key)) {
+      // ev.preventDefault();
+      // this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+    } else if (!_.indexOf(['ArrowUp', 'ArrowLeft'], ev.key)) {
+      // ev.preventDefault();
+      // this.grid.findPrev(this.searchText, this.caseSensitive, this.exactMatch);
     }
   }
 
   public updateSearch(): void {
     this.caseSensitive = !this.caseSensitive;
-    this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+    // this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
   }
 
   public updateExactSearch(): void {
     this.exactMatch = !this.exactMatch;
-    this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+    // this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
   }
 }

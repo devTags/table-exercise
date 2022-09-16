@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
+import { UserTable } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +14,9 @@ export class UserService {
   private phone: number = 0;
   private address: string = '';
 
-
   constructor() { }
 
-
-
-  setUser(name: string, email: string, job: string, image: string, phone: number, address: string): void {
-    this.name = name;
-    this.email = email;
-    this.job = job;
-    this.image = image;
-    this.phone = phone;
-    this.address = address;
+  setUser(account: UserTable): void {
+    _.assign(this, account)
   }
-
-  getName(): string  { return this.name }
-  getEmail(): string  { return this.email }
-  getJob(): string  { return this.job }
-  getImage(): string  { return this.image }
-  getPhone(): number  { return this.phone }
-  getAddress(): string  { return this.address }
-
 }

@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../../services/data.service';
 
 import { ViewTableComponent } from './view-table.component';
 
@@ -40,12 +40,12 @@ describe('ViewTableComponent', () => {
     
   //   component.rowAdded({data: dummyUsers})
   // })
-  it('should return users data via GET Funtion', () => {
-    expect(component.usersTable).toBeFalsy();
-    component.getData();
+  // it('should return users data via GET Funtion', () => {
+  //   expect(component.usersTable).toBeFalsy();
+  //   component.getAllUserData();
     
-    expect(component.usersTable).toBeTruthy();
-  })
+  //   expect(component.usersTable).toBeTruthy();
+  // })
 
   it('should return have defaultPrevented as Enter', () => {
     fixture.detectChanges();
@@ -64,8 +64,11 @@ describe('ViewTableComponent', () => {
   it('should cleartext in input field if button clicked', () => {
     expect(component.searchText).toBeFalsy();
     component.clearSearch();
-    component.grid.clearSearch();
-    expect(component.searchText).toBeTruthy();
+    // component.grid.clearCellSelection
+    expect(component.searchText).toBe('');
+
+    //call the method itself
+    //toBeThruty
   })
 
 
