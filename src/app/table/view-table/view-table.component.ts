@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
-import {IRowDataEventArgs, IGridEditDoneEventArgs} from 'igniteui-angular';
-import { IgxGridComponent} from 'igniteui-angular';
+import { IRowDataEventArgs, IGridEditDoneEventArgs } from 'igniteui-angular';
+import { IgxGridComponent } from 'igniteui-angular';
 import { UserTable } from 'src/app/interfaces';
+import * as _ from 'lodash';
 
 
 
@@ -15,12 +16,10 @@ import { UserTable } from 'src/app/interfaces';
 export class ViewTableComponent implements OnInit {
   @ViewChild('grid1', { static: true }) public grid!: IgxGridComponent;
 
-  public searchText = '';
-  public caseSensitive = false;
-  public exactMatch = false;
+  public searchText: string = '';
+  public caseSensitive: boolean = false;
+  public exactMatch: boolean = false;
   usersTable: UserTable[] = [];
-
-  dataTable: [] = []
 
   constructor(private _ds: DataService) { }
 
@@ -28,81 +27,48 @@ export class ViewTableComponent implements OnInit {
     this.getData()
   }
 
-  async getData(){
-
-    await firstValueFrom(this._ds.get('getDataTable'))?.then((res: UserTable[]) => {
-
-    this.usersTable = res;
-    console.log(this.usersTable[0]['email'])
-
-   }, err => {
-
-    console.log(err)
-
-   })
+  async getData(): Promise<void> {
+    await firstValueFrom(this._ds.getUsers()).then((res: UserTable[]) => ( this.usersTable = res ), console.error);
   }
 
 
-  async rowAdded(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.post('getDataTable', event.data)).then((res: UserTable[]) => {
-      
-      console.log(res)
-     }, err => {
-  
-      console.log(err)
-  
-     }) 
+  async rowAdded(event: IRowDataEventArgs): Promise<void> {
+    await firstValueFrom(this._ds.addUsers(event.data)).then((res: UserTable[]) => console.log , console.error);
   }
 
-  async rowDeleted(event: IRowDataEventArgs){
-    await firstValueFrom(this._ds.delete(`getDataTable/${event.data.id}`)).then((res: UserTable[]) => {
-      
-      console.log(res)
-     }, err => {
-  
-      console.log(err)
-  
-     })
+  // async rowDeleted(event: IRowDataEventArgs): Promise<void> {
+  //   await firstValueFrom(this._ds.deleteUsers(event.data.id)).then((res: UserTable[]) => console.log , console.error);
+  // }
 
+  // async rowEditDone(event: IGridEditDoneEventArgs): Promise<void> {
+
+  //   await firstValueFrom(this._ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => this.getData(), console.error);
+
+  // }
+
+  public clearSearch(): void {
+    this.searchText = ''; 
+    this.grid.clearSearch();
   }
 
-  async rowEditDone(event: IGridEditDoneEventArgs){
+  public searchKeyDown(ev: KeyboardEvent): void {
 
-    await firstValueFrom(this._ds.put('getDataTable', event.rowID, event.newValue)).then((res: UserTable[]) => {
-       
-      this.getData()
-     }, err => {
-  
-      console.log(err)
-  
-     })
-
-  }
-  
-
-
-    public clearSearch() {
-      this.searchText = '';
-      this.grid.clearSearch();
-  }
-
-  public searchKeyDown(ev: KeyboardEvent):void {
-      if (ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
-          ev.preventDefault();
-          this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
-      } else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
-          ev.preventDefault();
-          this.grid.findPrev(this.searchText, this.caseSensitive, this.exactMatch);
-      }
-  }
-
-  public updateSearch() {
-      this.caseSensitive = !this.caseSensitive;
+    if (!_.indexOf(['Enter','ArrowDown','ArrowRight'],  ev.key)) {
+      ev.preventDefault();
       this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+    } else if (!_.indexOf(['ArrowUp','ArrowLeft'],  ev.key)) {
+      ev.preventDefault();
+      this.grid.findPrev(this.searchText, this.caseSensitive, this.exactMatch);
+    }
   }
 
-  public updateExactSearch() {
-      this.exactMatch = !this.exactMatch;
-      this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+  public updateSearch(): void {
+    this.caseSensitive = !this.caseSensitive;
+    this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
+  }
+
+  public updateExactSearch(): void {
+    this.exactMatch = !this.exactMatch;
+    this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
   }
 }

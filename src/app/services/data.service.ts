@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { UserTable } from '../interfaces';
 
 @Injectable({
@@ -7,28 +9,28 @@ import { UserTable } from '../interfaces';
 })
 export class DataService {
 
-  baseUrl: string = 'https://631ee3db22cefb1edc3ced68.mockapi.io/';
+  baseUrl = environment.baseUrl;
 
   constructor(private _http: HttpClient) { }
 
 
 
-  public  get(endpoint: string){
-    return this._http.get<UserTable[]>(this.baseUrl + endpoint);
+  public  getUsers(): Observable<UserTable[]>{
+    return this._http.get<UserTable[]>(this.baseUrl + 'getDataTable' );
 
   }
 
-  public post(endpoint: string, userData: UserTable[]){
-    return this._http.post<UserTable[]>(this.baseUrl + endpoint, userData)
+  public addUsers(userData: UserTable[]): Observable<UserTable[]>{
+    return this._http.post<UserTable[]>(this.baseUrl + 'getDataTable', userData)
   }
 
-  public put(endpoint: string, id: number, userData: UserTable[]) {
-    return this._http.put<UserTable[]>(`${this.baseUrl}${endpoint}/${id}`, userData)
+  // public putUsers(id: number, userData: UserTable[]): Observable<UserTable[]>{
+  //   return this._http.put<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`, userData)
 
-  }
+  // }
 
-  public delete(endpoint: string){
-    return this._http.delete<UserTable[]>(this.baseUrl + endpoint)
-  }
+  // public deleteUsers(id: number): Observable<UserTable[]>{
+  //   return this._http.delete<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`)
+  // }
 
 }

@@ -1,5 +1,6 @@
 export interface UserTable {
     createdAt: string
+    password: string
     name: string
     address: string
     image: string
