@@ -15,6 +15,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-table.component.scss']
 })
 export class ViewTableComponent implements OnInit {
+  addUsers(): any {
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('grid1', { static: true }) public grid!: IgxGridComponent;
 
   public searchText: string = '';
