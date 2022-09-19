@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IgxPrefixModule } from 'igniteui-angular';
 import { DataService } from '../../../services/data.service';
 
 import { ViewTableComponent } from './view-table.component';
@@ -10,7 +11,7 @@ describe('ViewTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HttpClientModule ],
+      imports: [ HttpClientModule,IgxPrefixModule ],
       providers: [ DataService ],
       declarations: [ ViewTableComponent ]
     })

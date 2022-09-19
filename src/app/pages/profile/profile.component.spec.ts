@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CardModule } from 'primeng/card';
 import { DataService } from 'src/app/services/data.service';
 
 import { ProfileComponent } from './profile.component';
@@ -11,7 +12,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [ DataService],
       declarations: [ ProfileComponent ]
     })

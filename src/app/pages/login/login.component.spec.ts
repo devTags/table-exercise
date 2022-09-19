@@ -153,7 +153,7 @@ describe('LoginComponent', () => {
   })
 
   it('should navigate to table page when login success', async() => {
-    fixture.whenStable().then(() => {
+    // fixture.whenStable().then(() => {
     jasmine.clock().install();
     component.isLoggedin = true;
     component['pageTransit'](accounts);
@@ -165,7 +165,7 @@ describe('LoginComponent', () => {
     jasmine.clock().tick(1500);
     expect(component.isLoggedin).toBeFalsy();
     jasmine.clock().uninstall();
-  })
+    // })
   });
 
 });
