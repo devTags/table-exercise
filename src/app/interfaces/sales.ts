@@ -1,7 +1,6 @@
 export interface Sale {
-    userId: number
-    id: number
-    title: string
-    completed: boolean
-  }
-  
+  createdAt: string
+  month: string
+  sales: string
+  id: string
+}

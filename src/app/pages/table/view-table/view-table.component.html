@@ -42,10 +42,10 @@
     </igx-input-group>
 
     <igx-grid igxPreventDocumentScroll #grid1 id="grid1" [data]="usersTable" [primaryKey]="'id'" width="100%" height="auto" [rowEditable]="true" [allowFiltering]="true" (rowAdded)="rowAdded($event)" 
-    >
+
     
-    <!-- (rowDeleted)="rowDeleted($event)"
-    (rowEditDone)="rowEditDone($event)"> -->
+    (rowDeleted)="rowDeleted($event)"
+    (rowEditDone)="rowEditDone($event)">
       
       <igx-paginator [perPage]="10"></igx-paginator>
 

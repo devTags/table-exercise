@@ -25,7 +25,8 @@ export class ProfileComponent implements OnInit {
   async getOneUser(id: number): Promise<void> {
     await firstValueFrom(this.ds.getOneUser(id)).then((res: UserTable[]) => 
     {
-      console.log(JSON.stringify(res))
+      // let data = JSON.stringify(res)
+      // console.log(data[0])
     }
     , console.error);
   }

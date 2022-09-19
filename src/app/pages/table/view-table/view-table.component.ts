@@ -15,6 +15,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-table.component.scss']
 })
 export class ViewTableComponent implements OnInit {
+  addUsers(): any {
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('grid1', { static: true }) public grid!: IgxGridComponent;
 
   public searchText: string = '';
@@ -41,15 +44,15 @@ export class ViewTableComponent implements OnInit {
     await firstValueFrom(this.ds.addUsers(event.data)).then((res: UserTable[]) => console.log, console.error);
   }
 
-  // async rowDeleted(event: IRowDataEventArgs): Promise<void> {
-  //   await firstValueFrom(this.ds.deleteUsers(event.data.id)).then((res: UserTable[]) => console.log , console.error);
-  // }
+  async rowDeleted(event: IRowDataEventArgs): Promise<void> {
+    await firstValueFrom(this.ds.deleteUsers(event.data.id)).then((res: UserTable[]) => console.log , console.error);
+  }
 
-  // async rowEditDone(event: IGridEditDoneEventArgs): Promise<void> {
+  async rowEditDone(event: IGridEditDoneEventArgs): Promise<void> {
 
-  //   await firstValueFrom(this.ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => this.getData(), console.error);
+    await firstValueFrom(this.ds.putUsers(event.rowID, event.newValue)).then((res: UserTable[]) => this.getAllUserData(), console.error);
 
-  // }
+  }
 
   public clearSearch(): void {
     this.searchText = '';

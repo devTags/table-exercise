@@ -29,9 +29,7 @@ export class AnalyticsComponent implements OnInit {
       labelFormat: 'PHP{value}k'
     }
     this.title = 'Sales Analysis';
-   
   }
-
 
   async getSaleData(): Promise<void> {
     await firstValueFrom(this.ds.getSales()).then((res: Sale[]) => (this.chartData = res), console.error)
