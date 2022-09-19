@@ -58,17 +58,15 @@ describe('ViewTableComponent', () => {
     fixture.detectChanges();
     const key = new KeyboardEvent('keydown', {key: 'ArrowUp'});
     component.searchKeyDown(key)
-    // check other values in expect block accordingly
+
  })
 
   it('should cleartext in input field if button clicked', () => {
     expect(component.searchText).toBeFalsy();
+    // component.searchText = 'sampledata'
     component.clearSearch();
     // component.grid.clearCellSelection
     expect(component.searchText).toBe('');
-
-    //call the method itself
-    //toBeThruty
   })
 
 

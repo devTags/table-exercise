@@ -27,14 +27,14 @@ export class DataService {
     return this.http.post<UserTable[]>(this.baseUrl + 'getDataTable', userData)
   }
 
-  // public putUsers(id: number, userData: UserTable[]): Observable<UserTable[]>{
-  //   return this._http.put<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`, userData)
+  public putUsers(id: number, userData: UserTable[]): Observable<UserTable[]>{
+    return this.http.put<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`, userData)
 
-  // }
+  }
 
-  // public deleteUsers(id: number): Observable<UserTable[]>{
-  //   return this._http.delete<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`)
-  // }
+  public deleteUsers(id: number): Observable<UserTable[]>{
+    return this.http.delete<UserTable[]>(`${this.baseUrl}/getDataTable/${id}`)
+  }
 
 
   public getSales(): Observable<Sale[]> {

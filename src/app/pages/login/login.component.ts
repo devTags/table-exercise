@@ -20,12 +20,17 @@ export class LoginComponent implements OnInit {
   isLoggedin: boolean = false;
   usersTable: UserTable[] = [];
 
+  defaultFormValues = { 
+    email: 'sample@gmail.com',
+    password: 'samplePassword'
+  }
+
   constructor(public fb: FormBuilder, public ds: DataService, public router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.minLength(2)),
+      password: new FormControl('', [Validators.required,Validators.minLength(2)]),
     })
   }
 
@@ -49,7 +54,7 @@ export class LoginComponent implements OnInit {
   * @param _email 
   * @param _password 
   */
-  public filterAccounts(res: UserTable[]) {
+  private filterAccounts(res: UserTable[]) {
     this.isLoggedin = true;
     const _email = this.loginForm.get('email')?.value;
     const _password = this.loginForm.get('password')?.value;
@@ -64,7 +69,7 @@ export class LoginComponent implements OnInit {
   /** 
    * @param account 
    */
-  public pageTransit(account: UserTable[]) {
+   private pageTransit(account: UserTable[]) {
     // this._us.setUser(account[0]);
     setTimeout(() =>{
       this.isLoggedin = false;
