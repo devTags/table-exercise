@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IgxPrefixModule } from 'igniteui-angular';
+import { of } from 'rxjs';
+import { UserTable } from 'src/app/interfaces';
 import { DataService } from '../../../services/data.service';
 
 import { ViewTableComponent } from './view-table.component';
@@ -8,6 +10,18 @@ import { ViewTableComponent } from './view-table.component';
 describe('ViewTableComponent', () => {
   let component: ViewTableComponent;
   let fixture: ComponentFixture<ViewTableComponent>;
+
+  let accounts: UserTable[] = [{
+    "createdAt": "2023-09-11T16:00:00.000Z",
+    "password": "",
+    "name": "Mr. Nadine Klocko",
+    "address": "05212 Crist Lights",
+    "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/642.jpg",
+    "email": "Darryl1@example.com",
+    "phone": "1-383-286-4225 x623",
+    "jobTitle": "Direct Accountability Officer",
+    "id": "2"
+  }];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,6 +61,37 @@ describe('ViewTableComponent', () => {
     
   //   expect(component.usersTable).toBeTruthy();
   // })
+
+
+  it('should get all user data', async () => {
+
+    const service = fixture.debugElement.injector.get(DataService)
+
+    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
+    // expect(service.getAllUsers).toHaveBeenCalled();
+    component.ngOnInit();
+
+    // Added missed `await` keyword
+    // expect(await component.getAllUserData()).toHaveBeenCalled()
+    expect(Object.keys(component.getAllUserData()).length).toBeTruthy();
+
+  });
+
+  
+  it('should add new user data', async () => {
+    fixture.detectChanges();
+    const key = new KeyboardEvent('keyup', {key: 'Enter'});
+    const service = fixture.debugElement.injector.get(DataService)
+    
+    spyOn(service, 'addUsers').and.returnValue(of(accounts));
+    // expect(service.getAllUsers).toHaveBeenCalled();
+    
+    // Added missed `await` keyword
+    expect(component.rowAdded).toEqual(key)
+
+  });
+
+
 
   it('should return have defaultPrevented as Enter', () => {
     fixture.detectChanges();
