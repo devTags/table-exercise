@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   value1: string = '';
   isLoggedin: boolean = false;
   usersTable: UserTable[] = [];
+  filtered_accounts: UserTable[] = [];
 
   defaultFormValues = { 
     email: 'sample@gmail.com',
@@ -61,7 +62,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
  /**
   * @param res 
   * @param _email 
@@ -69,14 +69,15 @@ export class LoginComponent implements OnInit {
   */
   private filterAccounts(res: UserTable[]) {
     this.isLoggedin = true;
-    const _email = this.loginForm.get('email')?.value;
-    const _password = this.loginForm.get('password')?.value;
-    const account = _.filter(res, (e) => (e.email === _email && e.password === _password));
+    const { email, password }= this.loginForm.value;
 
-    if(account && _.size(account)){
-      this.pageTransit(account)
+    this.filtered_accounts = _.filter(res, {email: email, password: password});
+
+    if(this.filtered_accounts && _.size(this.filtered_accounts)){
+      this.pageTransit(this.filtered_accounts)
     }else {
       alert("Account not Found!")
+      this.isLoggedin = false;
     }
   }
   /** 

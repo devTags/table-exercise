@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IgxPrefixModule } from 'igniteui-angular';
+import { data } from '@syncfusion/ej2';
+import { IGridEditDoneEventArgs, IgxGridComponent, IgxPrefixModule, IRowDataEventArgs} from 'igniteui-angular';
 import { of } from 'rxjs';
 import { UserTable } from 'src/app/interfaces';
 import { DataService } from '../../../services/data.service';
@@ -10,7 +11,7 @@ import { ViewTableComponent } from './view-table.component';
 describe('ViewTableComponent', () => {
   let component: ViewTableComponent;
   let fixture: ComponentFixture<ViewTableComponent>;
-
+  let deleteEv: IRowDataEventArgs;
   let accounts: UserTable[] = [{
     "createdAt": "2023-09-11T16:00:00.000Z",
     "password": "",
@@ -22,6 +23,14 @@ describe('ViewTableComponent', () => {
     "jobTitle": "Direct Accountability Officer",
     "id": "2"
   }];
+
+  let event: IGridEditDoneEventArgs = {
+    rowID: undefined,
+    rowData: undefined,
+    oldValue: undefined,
+    newValue: undefined
+  }
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -80,18 +89,70 @@ describe('ViewTableComponent', () => {
   
   it('should add new user data', async () => {
     fixture.detectChanges();
-    const key = new KeyboardEvent('keyup', {key: 'Enter'});
+   
     const service = fixture.debugElement.injector.get(DataService)
     
     spyOn(service, 'addUsers').and.returnValue(of(accounts));
     // expect(service.getAllUsers).toHaveBeenCalled();
     
     // Added missed `await` keyword
-    expect(component.rowAdded).toEqual(key)
+    expect(component.rowAdded).toEqual(of(accounts))
 
   });
 
+  // it('should delete new user data', async () => {
+  //   fixture.detectChanges();
+   
+  //   const service = fixture.debugElement.injector.get(DataService)
+    
+  //   // spyOn(service, 'addUsers').and.returnValue(of(accounts));
+  //   spyOn(service,'deleteUsers').and.returnValue(of(accounts));
+  //   // expect(service.getAllUsers).toHaveBeenCalled();
+    
+  //   // Added missed `await` keyword
+  //   expect(component.rowDeleted(deleteEv)).toBeTruthy()
 
+  // });
+
+  
+  // it('should return true if delete row', () => {
+  //   fixture = TestBed.createComponent(ViewTableComponent);
+  //   component = fixture.componentInstance;
+    
+  //   const service = fixture.debugElement.injector.get(DataService)
+
+  //   spyOn(service, 'deleteUsers').and.returnValue(of(accounts));
+
+    
+  //   expect(component.rowDeleted(deleteEv)).toBeTruthy()
+  // })
+
+
+  it('should edit user data', async () => {
+    fixture.detectChanges();
+
+    const service = fixture.debugElement.injector.get(DataService)
+    
+    service.putUsers(event.rowID, event.newValue)
+    // expect(service.getAllUsers).toHaveBeenCalled();
+    // component.rowEditDone
+    // Added missed `await` keyword
+    // component.getAllUserData();
+    expect(component.rowEditDone(event)).toBeTruthy()
+
+  });
+
+  it('should return true if edit row', () => {
+    fixture = TestBed.createComponent(ViewTableComponent);
+    component = fixture.componentInstance;
+    
+    const service = fixture.debugElement.injector.get(DataService)
+
+    spyOn(service, 'putUsers').and.returnValue(of(accounts));
+
+
+    expect(component.rowEditDone(event)).toBeTruthy()
+  })
 
   it('should return have defaultPrevented as Enter', () => {
     fixture.detectChanges();

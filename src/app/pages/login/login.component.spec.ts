@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let service: DataService;
   let location, router: Router;
-  let mockRouter;
+  let mockRouter: { navigate: jasmine.Spy<jasmine.Func>; };
 
   let accounts: UserTable[] = [{
     "createdAt": "2023-09-11T16:00:00.000Z",
@@ -54,17 +54,19 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should filter user data when submit', () => {
-  //   fixture = TestBed.createComponent(LoginComponent);
-  //   component = fixture.componentInstance;
+  it('should filter user data when submit', () => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
 
-  //   spyOn(component, 'filterAccounts').and.callThrough();
-  //   const service = fixture.debugElement.injector.get(DataService)
+    // spyOn(component, ['filterAccounts']()).and.callThrough();
+    const service = fixture.debugElement.injector.get(DataService)
 
-  //   component.signin();
+    component.signin();
 
-  //   spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-  // })
+    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
+  })
+
+  
   it('should return true', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -78,29 +80,21 @@ describe('LoginComponent', () => {
   })
 
 
-  it('should filter user data when submit', async () => {
+  it('should get Users data when sign in', async () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
 
     const service = fixture.debugElement.injector.get(DataService)
 
     spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
+
+    // component.filtered_accounts = accounts
     // expect(service.getAllUsers).toHaveBeenCalled();
+    // spyOn(component, 'pageTransit').withArgs(of(accounts)).and.returnValue(of(accounts))
 
     // Added missed `await` keyword
     expect(await component.getUsers()).toBeTruthy()
   });
-
-  // it('should have password', ()=> {
-  //   spyOn(component, 'pageTransit').and.callThrough();
-  //   const service = fixture.debugElement.injector.get(DataService)
-  //   const accounts: UserTable[] = [];
-
-  //   component.signin();
-
-  //   spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-
-  //  })
 
   // Form Group Testing
   it('check initial form values for login formgroup', async () => {
@@ -152,20 +146,23 @@ describe('LoginComponent', () => {
     expect(component.isLoggedin).toBeFalsy();
   })
 
-  it('should navigate to table page when login success', async() => {
-    // fixture.whenStable().then(() => {
+  it('should set Timeout when page transit', async() => {
+    fixture.detectChanges()
     jasmine.clock().install();
     component.isLoggedin = true;
+    // component.signin();
     component['pageTransit'](accounts);
-    spyOn(router, 'navigate').and.callThrough();
- 
-      fixture.detectChanges();
-      expect(router.navigate).toHaveBeenCalledWith(['table'], { queryParams: { accounts: "2" } });
- 
     jasmine.clock().tick(1500);
-    expect(component.isLoggedin).toBeFalsy();
+    // expect(component.isLoggedin).toBeFalsy();
     jasmine.clock().uninstall();
     // })
   });
+
+
+  it('should navigate to table page when login success', () => {
+    spyOn(component, 'signin').and.callThrough();
+    spyOn(router, "navigate")
+    expect(router.navigate).toHaveBeenCalledWith(['table'], { queryParams: {accounts: "2"}  });
+  })
 
 });
