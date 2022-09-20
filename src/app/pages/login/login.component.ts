@@ -67,13 +67,13 @@ export class LoginComponent implements OnInit {
   * @param _email 
   * @param _password 
   */
-  private filterAccounts(res: UserTable[]) {
+  filterAccounts(res: UserTable[]) {
     this.isLoggedin = true;
     const { email, password }= this.loginForm.value;
 
     this.filtered_accounts = _.filter(res, {email: email, password: password});
 
-    if(this.filtered_accounts && _.size(this.filtered_accounts)){
+    if(this.filtered_accounts){
       this.pageTransit(this.filtered_accounts)
     }else {
       alert("Account not Found!")
@@ -83,11 +83,11 @@ export class LoginComponent implements OnInit {
   /** 
    * @param account 
    */
-   private pageTransit(account: UserTable[]) {
+  pageTransit(account: UserTable[]) {
     // this._us.setUser(account[0]);
     setTimeout(() =>{
       this.isLoggedin = false;
-      this.router.navigate(['/table'], {queryParams: {accounts: account[0].id}});
+      this.router.navigate(['/table',account[0].id]);
     },1500)
   }
 

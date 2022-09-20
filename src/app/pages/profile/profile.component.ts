@@ -16,10 +16,9 @@ export class ProfileComponent implements OnInit {
   constructor(private ds: DataService, private routeActive: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.routeActive.queryParams
-    .subscribe((params) => {
-      this.getOneUser(params['accounts'])
-    });
+    this.routeActive.paramMap.subscribe(params => { 
+      this.getOneUser(Number(params.get('id'))); 
+  });
   }
 
   async getOneUser(id: number): Promise<void> {
