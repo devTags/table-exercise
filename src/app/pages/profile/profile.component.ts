@@ -17,11 +17,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeActive.paramMap.subscribe(params => { 
-      this.getOneUser(Number(params.get('id'))); 
+      this.getUserProfile(Number(params.get('id'))); 
   });
   }
 
-  async getOneUser(id: number): Promise<void> {
+  async getUserProfile(id: number): Promise<void> {
     await firstValueFrom(this.ds.getOneUser(id)).then((res: UserTable[]) => 
     {
       // let data = JSON.stringify(res)

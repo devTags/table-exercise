@@ -101,7 +101,7 @@ describe('ViewTableComponent', () => {
 
   // });
 
-  it('should return true if added new user data', () => {
+  it('should return true if successfully added new user', () => {
 
 
     fixture = TestBed.createComponent(ViewTableComponent);
@@ -131,7 +131,7 @@ describe('ViewTableComponent', () => {
   // });
 
   
-  it('should return true if delete row', () => {
+  it('should return true if successfully deleted a user', () => {
 
 
     fixture = TestBed.createComponent(ViewTableComponent);
@@ -160,7 +160,7 @@ describe('ViewTableComponent', () => {
 
   // });
 
-  it('should return true if edit row', () => {
+  it('should return true if successfully deleted a user', () => {
     fixture = TestBed.createComponent(ViewTableComponent);
     component = fixture.componentInstance;
     
@@ -173,17 +173,21 @@ describe('ViewTableComponent', () => {
   })
 
   it('should return have defaultPrevented as Enter', () => {
+    const keyEvent  = new KeyboardEvent('keydown', {key: 'Enter'});
+    const spy = spyOn(keyEvent, 'preventDefault');        
+    component.searchKeyDown(keyEvent);
     fixture.detectChanges();
-    const key = new KeyboardEvent('keydown', {key: 'Enter'});
-    component.searchKeyDown(key)
+    expect(spy).toBeTruthy()
+
     // expect(component.searchKeyDown).toBeTrue();
   })
 
   it('should return have defaultPrevented as ArrowUp' ,()=>{
+    const keyEvent  = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+    const spy = spyOn(keyEvent, 'preventDefault');        
+    component.searchKeyDown(keyEvent);
     fixture.detectChanges();
-    const key = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-    component.searchKeyDown(key)
-
+    expect(spy).toBeTruthy()
  })
 
   it('should cleartext in input field if button clicked', () => {

@@ -16,7 +16,7 @@ describe('DataService', () => {
     "email": "Carole_Crooks76@example.com",
     "phone": "(821) 885-8760 x87741",
     "jobTitle": "Dynamic Research Officer",
-    "id": ""
+    "id": "2"
   }];
 
   const dummyUsers: UserTable[] = [{
@@ -57,7 +57,7 @@ describe('DataService', () => {
     httpMock.verify();
   })
 
-  it('should retrive users from API via GET', () => {
+  it('should fetch all user data from API via GET', () => {
     service.getAllUsers().subscribe(users => {
       expect(users.length).toBe(2);
       expect(users).toEqual(dummyUsers);
@@ -71,46 +71,41 @@ describe('DataService', () => {
   });
 
   it('should add users from API via POST', () => {
-    const newUser: UserTable[] = [{
-      "createdAt": "",
-      "password": "",
-      "name": "Donald Trump",
-      "address": "505 Rey Street",
-      "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
-      "email": "Carole_Crooks76@example.com",
-      "phone": "(821) 885-8760 x87741",
-      "jobTitle": "Dynamic Research Officer",
-      "id": ""
-    }];
 
     service.addUsers(newUser).subscribe(user => {
-      expect(user).toEqual(newUser, 'should return the user');
+      expect(user).toBe(newUser);
     })
 
     const request = httpMock.expectOne(`${service.baseUrl}getDataTable`);
-    expect(request.request.method).toEqual('POST');
-    expect(request.request.body).toEqual(newUser);
+    expect(request.request.method).toBe('POST');
+    expect(request.request.body).toBe(newUser);
+
 
     const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
     request.event(expectedResponse);
+
+    request.flush(newUser);
+
+    httpMock.verify();
+
   })
 
   it('should update users from API via PUT', () => {
-    const newUser: UserTable[] = [{
-      "password": "",
-      "createdAt": "",
-      "name": "Donald Trump",
-      "address": "505 Rey Street",
-      "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/927.jpg",
-      "email": "Carole_Crooks76@example.com",
-      "phone": "(821) 885-8760 x87741",
-      "jobTitle": "Dynamic Research Officer",
-      "id": ""
-    }];
 
+    service.putUsers(2, newUser).subscribe((user) => {
+      expect(user).toBe(newUser);
+    })
 
-    service.putUsers(1,newUser).subscribe()
-    const request = httpMock.expectOne( (req: HttpRequest<any>)  => req.method === 'PUT').flush(null);
+    const request = httpMock.expectOne(
+      `${service.baseUrl}getDataTable/${2}`,
+    );
+
+    expect(request.request.method).toBe('PUT');
+
+    request.flush(newUser);
+
+    httpMock.verify();
+    // const request = httpMock.expectOne((req: HttpRequest<any>) => req.method === 'PUT').flush(null);
 
     // service.putUsers(2,newUser).subscribe(user => {
     //   expect(user).toEqual(newUser, 'should return the user');
@@ -126,12 +121,27 @@ describe('DataService', () => {
 
 
   it('should delete users from API via DELETE', () => {
-    const mockPr1 = 20;
+    service.deleteUsers(3).subscribe((user: any) => {
+      expect(user).toBe(3);
+    });
+  
+    const req = httpMock.expectOne(
+      `${service.baseUrl}getDataTable/${3}`,
+      'delete to api'
+    );
+    expect(req.request.method).toBe('DELETE');
+  
+    req.flush(3);
+  
+    httpMock.verify();
 
-    service.deleteUsers(mockPr1).subscribe()
-    const request = httpMock.expectOne( (req: HttpRequest<any>)  => req.method === 'DELETE').flush(null);
 
-    // expect(request.request.method).toBe('DELETE');
+    // const mockPr1 = 20;
+
+    // service.deleteUsers(mockPr1).subscribe()
+    // const request = httpMock.expectOne((req: HttpRequest<any>) => req.method === 'DELETE');
+
+
 
     // request.flush(null)
     // const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
