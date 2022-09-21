@@ -15,6 +15,7 @@
 > My Intercard Table  Exercise 
 
 > Technologies Used: Angular, MockAPI, IngiteUI and PrimeNG
+
 > Update: 100% Code Coverage and Code Cleanup
 
 ### 🏠 [Homepage](https://github.com/devTags/table-exercise#readme)
