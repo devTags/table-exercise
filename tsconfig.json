@@ -23,7 +23,7 @@
       "dom"
     ]
   },
-  "exclude": ["cypress.config.ts", "cypress"],
+  // "exclude": ["cypress.config.ts", "cypress"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

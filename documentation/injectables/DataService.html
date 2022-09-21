@@ -98,6 +98,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#deleteUsers" >deleteUsers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getAllUsers" >getAllUsers</a>
                             </li>
                             <li>
@@ -107,6 +111,10 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getSales" >getSales</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#putUsers" >putUsers</a>
                             </li>
                         </ul>
                     </td>
@@ -221,6 +229,77 @@
                                     <td>userData</td>
                                     <td>
                                                 <code><a href="../interfaces/UserTable.html" target="_self" >UserTable[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/UserTable.html" target="_self" >Observable&lt;UserTable[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteUsers"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>deleteUsers</b></span>
+                        <a href="#deleteUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteUsers(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/services/data.service.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
 
                                     <td>
@@ -394,6 +473,89 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="putUsers"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>putUsers</b></span>
+                        <a href="#putUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>putUsers(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, userData: <a href="../interfaces/UserTable.html" target="_self">UserTable[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/app/services/data.service.ts:30</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>userData</td>
+                                    <td>
+                                                <code><a href="../interfaces/UserTable.html" target="_self" >UserTable[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/UserTable.html" target="_self" >Observable&lt;UserTable[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -453,25 +615,25 @@ export class DataService {
   }
 
   public  getAllUsers(): Observable&lt;UserTable[]&gt;{
-    return this.http.get&lt;UserTable[]&gt;(this.baseUrl + &#x27;getDataTable&#x27; );
+    return this.http.get&lt;UserTable[]&gt;(&#x60;${this.baseUrl}getDataTable&#x60;);
   }
 
   public addUsers(userData: UserTable[]): Observable&lt;UserTable[]&gt;{
-    return this.http.post&lt;UserTable[]&gt;(this.baseUrl + &#x27;getDataTable&#x27;, userData)
+    return this.http.post&lt;UserTable[]&gt;(&#x60;${this.baseUrl}getDataTable&#x60;, userData)
   }
 
-  // public putUsers(id: number, userData: UserTable[]): Observable&lt;UserTable[]&gt;{
-  //   return this._http.put&lt;UserTable[]&gt;(&#x60;${this.baseUrl}/getDataTable/${id}&#x60;, userData)
+  public putUsers(id: number, userData: UserTable[]): Observable&lt;UserTable[]&gt;{
+    return this.http.put&lt;UserTable[]&gt;(&#x60;${this.baseUrl}getDataTable/${id}&#x60;, userData)
 
-  // }
+  }
 
-  // public deleteUsers(id: number): Observable&lt;UserTable[]&gt;{
-  //   return this._http.delete&lt;UserTable[]&gt;(&#x60;${this.baseUrl}/getDataTable/${id}&#x60;)
-  // }
+  public deleteUsers(id: number): Observable&lt;UserTable[]&gt;{
+    return this.http.delete&lt;UserTable[]&gt;(&#x60;${this.baseUrl}getDataTable/${id}&#x60;)
+  }
 
-
+  
   public getSales(): Observable&lt;Sale[]&gt; {
-    return this.http.get&lt;Sale[]&gt;(this.baseUrl + &#x27;getChartData &#x27; );
+    return this.http.get&lt;Sale[]&gt;(&#x60;${this.baseUrl}getChartData&#x60;);
   }
 
 }
