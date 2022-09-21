@@ -16,8 +16,17 @@ export class AnalyticsComponent implements OnInit {
   public chartData: Sale[] = [];
   public title!: string;
 
+  /**
+  * This constructor initializes injectable components 
+   */ 
+
 
   constructor(private ds: DataService) { }
+  
+  /**
+   * This function is used to initialize primaryXAxis, primaryYAxis and title Values
+   * and call getSalesData Method
+  */ 
 
   ngOnInit(): void {
     // Data for chart series
@@ -30,6 +39,11 @@ export class AnalyticsComponent implements OnInit {
     }
     this.title = 'Sales Analysis';
   }
+
+  
+  /**
+   * This function is used to get the sales data when successfully login
+   */ 
 
   async getSaleData(): Promise<void> {
     await firstValueFrom(this.ds.getSales()).then((res: Sale[]) => (this.chartData = res), console.error)
