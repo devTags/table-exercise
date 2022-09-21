@@ -35,15 +35,22 @@ describe('AnalyticsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get sales data', async () => {
- 
+  it('should get user sales analysis data', async () => {
+
+    // const mySpy = spyOn(component, 'pageTransit')
+    component.getSaleData()
+
     const service = fixture.debugElement.injector.get(DataService)
 
     spyOn(service, 'getSales').and.returnValue(of(chartData));
+
+    // component.filtered_accounts = accounts
     // expect(service.getAllUsers).toHaveBeenCalled();
-    component.getSaleData();
+    // spyOn(component, 'pageTransit').withArgs(of(accounts)).and.returnValue(of(accounts))
 
     // Added missed `await` keyword
-
+    // expect(mySpy).toHaveBeenCalledTimes(1)
+    expect(await Object.keys(component.getSaleData()).length).toBeGreaterThan(1)
   });
+
 });

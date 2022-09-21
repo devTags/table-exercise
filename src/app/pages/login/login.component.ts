@@ -21,12 +21,6 @@ export class LoginComponent implements OnInit {
   usersTable: UserTable[] = [];
   filtered_accounts: UserTable[] = [];
 
-  defaultFormValues = { 
-    email: 'sample@gmail.com',
-    password: 'samplePassword'
-  }
-
-
   constructor(public fb: FormBuilder, public ds: DataService, public router: Router,   private _routeActive: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -42,9 +36,7 @@ export class LoginComponent implements OnInit {
 
   isLoggined(){
     let isLogged = this._routeActive.queryParams
-    .subscribe((params) => {
-     return  params['accounts'] ? true : false;
-    });
+    .subscribe((_params) => {});
     return  isLogged
   }
   
@@ -73,11 +65,11 @@ export class LoginComponent implements OnInit {
 
     this.filtered_accounts = _.filter(res, {email: email, password: password});
 
+    this.isLoggedin = false;
+
     if(this.filtered_accounts){
-      this.pageTransit(this.filtered_accounts)
-    }else {
-      alert("Account not Found!")
-      this.isLoggedin = false;
+      this.pageTransit(this.filtered_accounts);
+      this.isLoggedin = true;
     }
   }
   /** 

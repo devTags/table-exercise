@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let service: DataService;
   let location, router: Router;
-  let mockRouter: { navigate: jasmine.Spy<jasmine.Func>; };
+  let mockRouter: any
 
   let accounts: UserTable[] = [{
     "createdAt": "2023-09-11T16:00:00.000Z",
@@ -77,30 +77,6 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should filter user data when submit', () => {
-    fixture = TestBed.createComponent(LoginComponent);
-    spyOn(component, 'signin').and.callThrough();
-
-    // component.loginForm.controls['email'].setValue('geral@yahoo.com')
-    // component.loginForm.controls['password'].setValue('password')
-    // spyOn(component, ['filterAccounts']()).and.callThrough();
-    const service = fixture.debugElement.injector.get(DataService)
-
-    component.signin()
-
-    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-  })
-
-
-  it('should return true', () => {
-    const service = fixture.debugElement.injector.get(DataService)
-
-    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-
-
-    expect(component.signin()).toBeTruthy()
-  })
-
   // Form Group Testing
   it('check initial form values for login formgroup', async () => {
     const loginForm = component.loginForm;
@@ -135,38 +111,26 @@ describe('LoginComponent', () => {
     expect(component.loginForm.valid).toBeTruthy();
   });
 
-  // it('should require valid email', () => {
-  //   expect(component.isLoggedin ).toBe(false);
 
-  //   component.loginForm.setValue({
-  //     "email": "bobby@bobby.com",
-  //     "password": "validpassword",
-  //   });
+  it('should call pageTransit if filtered account exists', () => {
 
-  //   expect(component.pageTransit).toBeTruthy();
-  // })
-
-
-  it('should pageTransit if account exists', () => {
-
+    jasmine.clock().install();
+    component.isLoggedin = false;
     component['pageTransit'](accounts);
     expect(component.isLoggedin).toBeFalsy();
-  })
 
-  it('should set Timeout when page transit', async () => {
-    fixture.detectChanges()
-    jasmine.clock().install();
-    component.isLoggedin = true;
-    // component.signin();
-    component['pageTransit'](accounts);
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(mockRouter.navigate).toHaveBeenCalledWith([`/table/${accounts[0].id}`]);
+    });
+
     jasmine.clock().tick(1500);
     // expect(component.isLoggedin).toBeFalsy();
     jasmine.clock().uninstall();
     // })
   });
 
-
-  it('should get Users data when sign in', async () => {
+  it('should call getUsers when sign in', async () => {
     const formGroupCred = {
       "email": "bobby@bobby.com",
       "password": "Email me a soda please."
@@ -188,39 +152,6 @@ describe('LoginComponent', () => {
     expect(await component.getUsers()).toBe()
   });
 
-
-  it('should navigate to table page when login success', () => {
-  
-    const navSpy = spyOn(router, "navigate")
-
-    component.filtered_accounts = accounts;
-    // expect(component.filtered_accounts).toEqual(accounts);
-    // expect(component.filtered_accounts.length).toBeGreaterThan(0);
-  //   expect(navSpy).toHaveBeenCalledWith(['/table/' + accounts[0].id]);
-    // component['pageTransit'](accounts);
-
-    component['filterAccounts'](accounts);
-    expect(component.filtered_accounts).toBeTruthy();
-
-  })
-
-
-
-
-
-  // it('should proceed to page trans if filtered_account is greater > 1', () => {
-  //   const mySpy = spyOn(component, 'pageTransit')
-
-  
-  //   component.filtered_accounts = accounts;
-  //   // expect(component.caseSensitive).toBeTruthy();
-
-  //   component['filterAccounts'](accounts);
-
-  //   expect(component.filtered_accounts.length).toEqual(0);
-  //   expect(mySpy).toHaveBeenCalled();
-  // })
-
   it('should be called page transition', () => {
     component.filtered_accounts = filtered_array;
 
@@ -232,13 +163,4 @@ describe('LoginComponent', () => {
     // expect(component.filtered_accounts[0]).toBe(accounts)
   });
 
-  it('should be not called page transition', () => {
-    component.filtered_accounts = [];
-
-    spyOn(component, 'filterAccounts')
-    
-
-    expect(component.isLoggedin).toBeFalsy();
-
-  });
 });
