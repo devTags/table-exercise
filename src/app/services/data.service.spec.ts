@@ -121,18 +121,6 @@ describe('DataService', () => {
     request.flush(newUser);
 
     httpMock.verify();
-    // const request = httpMock.expectOne((req: HttpRequest<any>) => req.method === 'PUT').flush(null);
-
-    // service.putUsers(2,newUser).subscribe(user => {
-    //   expect(user).toEqual(newUser, 'should return the user');
-    // })
-
-    // const request = httpMock.expectOne(`${service.baseUrl}getDataTable/`+ 2);
-    // expect(request.method).toEqual('PUT');
-    // expect(request.body).toEqual(newUser);
-
-    // const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
-    // request.event(expectedResponse);
   })
 
 
@@ -150,18 +138,6 @@ describe('DataService', () => {
     req.flush(3);
   
     httpMock.verify();
-
-
-    // const mockPr1 = 20;
-
-    // service.deleteUsers(mockPr1).subscribe()
-    // const request = httpMock.expectOne((req: HttpRequest<any>) => req.method === 'DELETE');
-
-
-
-    // request.flush(null)
-    // const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: newUser });
-    // request.event(expectedResponse);
   })
 
 });
