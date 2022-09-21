@@ -108,7 +108,7 @@ describe('ViewTableComponent', () => {
     expect(component.rowEditDone(event)).toBeTruthy()
   })
 
-  it('should return have defaultPrevented as Enter', () => {
+  it('should return true if have defaultPrevented as Enter', () => {
     const keyEvent  = new KeyboardEvent('keydown', {key: 'Enter'});
     const spy = spyOn(keyEvent, 'preventDefault');        
     component.searchKeyDown(keyEvent);
@@ -118,7 +118,7 @@ describe('ViewTableComponent', () => {
     // expect(component.searchKeyDown).toBeTrue();
   })
 
-  it('should return have defaultPrevented as ArrowUp' ,()=>{
+  it('should return true have defaultPrevented as ArrowUp' ,()=>{
     const keyEvent  = new KeyboardEvent('keydown', {key: 'ArrowUp'});
     const spy = spyOn(keyEvent, 'preventDefault');        
     component.searchKeyDown(keyEvent);
