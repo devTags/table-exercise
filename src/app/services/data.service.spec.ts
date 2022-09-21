@@ -3,10 +3,12 @@ import { DataService } from './data.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { HttpClientModule, HttpRequest, HttpResponse } from '@angular/common/http';
 import { UserTable } from '../interfaces';
+import { Sale } from '../interfaces/sales';
 
 describe('DataService', () => {
   let service: DataService;
   let httpMock: HttpTestingController;
+  const dummySales: Sale[] = []
   const newUser: UserTable[] = [{
     "password": "",
     "createdAt": "",
@@ -56,6 +58,20 @@ describe('DataService', () => {
   afterEach(() => {
     httpMock.verify();
   })
+  it('should fetch getSales data from API via GET', () => {
+    service.getSales().subscribe(sales => {
+      expect(sales.length).toBe(0);
+      expect(sales).toEqual(dummySales);
+    })
+
+    const request = httpMock.expectOne(`${service.baseUrl}getChartData`);
+
+    expect(request.request.method).toBe('GET');
+
+    request.flush(dummySales)
+  });
+
+
 
   it('should fetch all user data from API via GET', () => {
     service.getAllUsers().subscribe(users => {
