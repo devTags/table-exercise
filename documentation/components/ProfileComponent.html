@@ -150,7 +150,7 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#getOneUser" >getOneUser</a>
+                                <a href="#getUserProfile" >getUserProfile</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -241,26 +241,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getOneUser"></a>
+                    <a name="getUserProfile"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
-                        <span ><b>getOneUser</b></span>
-                        <a href="#getOneUser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getUserProfile</b></span>
+                        <a href="#getUserProfile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getOneUser(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>getUserProfile(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/pages/profile/profile.component.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/pages/profile/profile.component.ts:24</a></div>
                 </td>
             </tr>
 
@@ -406,17 +406,16 @@ export class ProfileComponent implements OnInit {
   constructor(private ds: DataService, private routeActive: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.routeActive.queryParams
-    .subscribe((params) &#x3D;&gt; {
-      this.getOneUser(params[&#x27;accounts&#x27;])
-    });
+    this.routeActive.paramMap.subscribe(params &#x3D;&gt; { 
+      this.getUserProfile(Number(params.get(&#x27;id&#x27;))); 
+  });
   }
 
-  async getOneUser(id: number): Promise&lt;void&gt; {
+  async getUserProfile(id: number): Promise&lt;void&gt; {
     await firstValueFrom(this.ds.getOneUser(id)).then((res: UserTable[]) &#x3D;&gt; 
     {
-      let data &#x3D; JSON.stringify(res)
-      console.log(data[0])
+      // let data &#x3D; JSON.stringify(res)
+      // console.log(data[0])
     }
     , console.error);
   }

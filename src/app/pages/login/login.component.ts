@@ -6,7 +6,6 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserTable } from 'src/app/interfaces';
 import { DataService } from 'src/app/services/data.service';
-import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -15,18 +14,39 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  
+  /**
+   * This variables are used for login and filtering user data
+   * @property loginForm Login form holder
+   * @param isLoggedin For loading screen
+   * @param UserTable User Table Interface
+   * @param filtered_accounts User Table Interface for filtering
+   */ 
+
   loginForm!: FormGroup;
-  value1: string = '';
   isLoggedin: boolean = false;
   usersTable: UserTable[] = [];
+  filtered_accounts: UserTable[] = [];
 
-  defaultFormValues = { 
-    email: 'sample@gmail.com',
-    password: 'samplePassword'
-  }
-
+    /**
+   * This constructor initializes injectable components 
+   * @param fb Form Builder
+   * @param ds Data Service
+   * @param router Router 
+   * @param _routeActive Router Parameter
+   */ 
 
   constructor(public fb: FormBuilder, public ds: DataService, public router: Router,   private _routeActive: ActivatedRoute) { }
+
+
+    
+  /**
+   * This function is used to initialize formgroup
+   * And calls isLoggined method
+   * @param loginForm.email Email holder
+   * @param loginForm.password Email holder
+   */
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -39,18 +59,28 @@ export class LoginComponent implements OnInit {
     }
   }
 
+     /**
+   * This function is used to check if user is signed in
+   * 
+   */
+
   isLoggined(){
     let isLogged = this._routeActive.queryParams
-    .subscribe((params) => {
-     return  params['accounts'] ? true : false;
-    });
+    .subscribe((_params) => {});
     return  isLogged
   }
-  
+
+    /**
+   * This function is used to get users data when the signIn function is called
+   */
   async getUsers(): Promise<void> {
     await firstValueFrom(this.ds.getAllUsers()).then((res: UserTable[]) =>this.filterAccounts(res));
   }
 
+  /**
+   * This function is used to login when the submit buttons was clicked
+   * 
+   */
   async signin(): Promise<void> {
     try {
       if(!this.loginForm.valid)
@@ -61,32 +91,32 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
  /**
-  * @param res 
-  * @param _email 
-  * @param _password 
+  * This function is used to filter accounts upon login
+  * @param res Res is the payload object for filtering accounts
   */
-  private filterAccounts(res: UserTable[]) {
+  filterAccounts(res: UserTable[]) {
     this.isLoggedin = true;
-    const _email = this.loginForm.get('email')?.value;
-    const _password = this.loginForm.get('password')?.value;
-    const account = _.filter(res, (e) => (e.email === _email && e.password === _password));
+    const { email, password }= this.loginForm.value;
 
-    if(account && _.size(account)){
-      this.pageTransit(account)
-    }else {
-      alert("Account not Found!")
+    this.filtered_accounts = _.filter(res, {email: email, password: password});
+
+    this.isLoggedin = false;
+
+    if(this.filtered_accounts){
+      this.pageTransit(this.filtered_accounts);
+      this.isLoggedin = true;
     }
   }
   /** 
-   * @param account 
+   * This function is used to navigate to table page after login
+   * @param account Account is the payload object after filtering accounts
    */
-   private pageTransit(account: UserTable[]) {
+  pageTransit(account: UserTable[]) {
     // this._us.setUser(account[0]);
     setTimeout(() =>{
       this.isLoggedin = false;
-      this.router.navigate(['/table'], {queryParams: {accounts: account[0].id}});
+      this.router.navigate(['/table',account[0].id]);
     },1500)
   }
 

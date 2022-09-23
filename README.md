@@ -14,10 +14,13 @@
 
 > My Intercard Table  Exercise 
 
+<<<<<<< HEAD
 > Update Cypress e2e and unit testing 100% code coverage
 
 >Implementation of Compodoc and snykUser 
 
+=======
+>>>>>>> f33fab604a8c42593506ba36c42c9a0e42b24308
 
 ### 🏠 [Homepage](https://github.com/devTags/table-exercise#readme)
 

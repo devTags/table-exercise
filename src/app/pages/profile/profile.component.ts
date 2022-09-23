@@ -16,13 +16,12 @@ export class ProfileComponent implements OnInit {
   constructor(private ds: DataService, private routeActive: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.routeActive.queryParams
-    .subscribe((params) => {
-      this.getOneUser(params['accounts'])
-    });
+    this.routeActive.paramMap.subscribe(params => { 
+      this.getUserProfile(Number(params.get('id'))); 
+  });
   }
 
-  async getOneUser(id: number): Promise<void> {
+  async getUserProfile(id: number): Promise<void> {
     await firstValueFrom(this.ds.getOneUser(id)).then((res: UserTable[]) => 
     {
       // let data = JSON.stringify(res)

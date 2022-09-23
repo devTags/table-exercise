@@ -197,6 +197,8 @@
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>This constructor initializes injectable components</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -260,14 +262,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/app/pages/analytics/analytics.component.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/app/pages/analytics/analytics.component.ts:48</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This function is used to get the sales data when successfully login</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -297,14 +301,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/pages/analytics/analytics.component.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/pages/analytics/analytics.component.ts:31</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This function is used to initialize primaryXAxis, primaryYAxis and title Values
+and call getSalesData Method</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -457,8 +464,17 @@ export class AnalyticsComponent implements OnInit {
   public chartData: Sale[] &#x3D; [];
   public title!: string;
 
+  /**
+  * This constructor initializes injectable components 
+   */ 
+
 
   constructor(private ds: DataService) { }
+  
+  /**
+   * This function is used to initialize primaryXAxis, primaryYAxis and title Values
+   * and call getSalesData Method
+  */ 
 
   ngOnInit(): void {
     // Data for chart series
@@ -470,9 +486,12 @@ export class AnalyticsComponent implements OnInit {
       labelFormat: &#x27;PHP{value}k&#x27;
     }
     this.title &#x3D; &#x27;Sales Analysis&#x27;;
-   
   }
 
+  
+  /**
+   * This function is used to get the sales data when successfully login
+   */ 
 
   async getSaleData(): Promise&lt;void&gt; {
     await firstValueFrom(this.ds.getSales()).then((res: Sale[]) &#x3D;&gt; (this.chartData &#x3D; res), console.error)

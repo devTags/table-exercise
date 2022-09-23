@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IgxPrefixModule } from 'igniteui-angular';
+import { data } from '@syncfusion/ej2';
+import { GridType } from '@syncfusion/ej2/diagrams';
+import { IGridEditDoneEventArgs, IgxGridComponent, IgxPrefixModule, IRowDataEventArgs} from 'igniteui-angular';
 import { of } from 'rxjs';
 import { UserTable } from 'src/app/interfaces';
 import { DataService } from '../../../services/data.service';
@@ -10,7 +12,7 @@ import { ViewTableComponent } from './view-table.component';
 describe('ViewTableComponent', () => {
   let component: ViewTableComponent;
   let fixture: ComponentFixture<ViewTableComponent>;
-
+  let IDataEvents = {data: {}}
   let accounts: UserTable[] = [{
     "createdAt": "2023-09-11T16:00:00.000Z",
     "password": "",
@@ -22,6 +24,14 @@ describe('ViewTableComponent', () => {
     "jobTitle": "Direct Accountability Officer",
     "id": "2"
   }];
+
+  let event: IGridEditDoneEventArgs = {
+    rowID: undefined,
+    rowData: undefined,
+    oldValue: undefined,
+    newValue: undefined
+  }
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,29 +50,6 @@ describe('ViewTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should create a new user in table', () => {
-  //   const dummyUsers: new IRowDataEventArgs 
-  //     ({
-  //       "createdAt": "2023-09-11T16:00:00.000Z",
-  //       "name": "Mr. Nadine Klocko",
-  //       "address": "05212 Crist Lights",
-  //       "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/642.jpg",
-  //       "email": "Darryl1@example.com",
-  //       "phone": "1-383-286-4225 ",
-  //       "jobTitle": "Direct Accountability Officer",
-  //       "id": "2"
-  //   })
-    
-  //   component.rowAdded({data: dummyUsers})
-  // })
-  // it('should return users data via GET Funtion', () => {
-  //   expect(component.usersTable).toBeFalsy();
-  //   component.getAllUserData();
-    
-  //   expect(component.usersTable).toBeTruthy();
-  // })
-
-
   it('should get all user data', async () => {
 
     const service = fixture.debugElement.injector.get(DataService)
@@ -78,33 +65,65 @@ describe('ViewTableComponent', () => {
   });
 
   
-  it('should add new user data', async () => {
-    fixture.detectChanges();
-    const key = new KeyboardEvent('keyup', {key: 'Enter'});
+  it('should return true if successfully added new user', () => {
+
+
+    fixture = TestBed.createComponent(ViewTableComponent);
+    component = fixture.componentInstance;
+    
     const service = fixture.debugElement.injector.get(DataService)
-    
+
     spyOn(service, 'addUsers').and.returnValue(of(accounts));
-    // expect(service.getAllUsers).toHaveBeenCalled();
+
     
-    // Added missed `await` keyword
-    expect(component.rowAdded).toEqual(key)
+    expect(component.rowAdded(IDataEvents as IRowDataEventArgs)).toBeTruthy()
+  })
 
-  });
+  
+  it('should return true if successfully deleted a user', () => {
+
+
+    fixture = TestBed.createComponent(ViewTableComponent);
+    component = fixture.componentInstance;
+    
+    const service = fixture.debugElement.injector.get(DataService)
+
+    spyOn(service, 'deleteUsers').and.returnValue(of(accounts));
+
+    
+    expect(component.rowDeleted(IDataEvents as IRowDataEventArgs)).toBeTruthy()
+  })
 
 
 
-  it('should return have defaultPrevented as Enter', () => {
+  it('should return true if successfully deleted a user', () => {
+    fixture = TestBed.createComponent(ViewTableComponent);
+    component = fixture.componentInstance;
+    
+    const service = fixture.debugElement.injector.get(DataService)
+
+    spyOn(service, 'putUsers').and.returnValue(of(accounts));
+
+
+    expect(component.rowEditDone(event)).toBeTruthy()
+  })
+
+  it('should return true if have defaultPrevented as Enter', () => {
+    const keyEvent  = new KeyboardEvent('keydown', {key: 'Enter'});
+    const spy = spyOn(keyEvent, 'preventDefault');        
+    component.searchKeyDown(keyEvent);
     fixture.detectChanges();
-    const key = new KeyboardEvent('keydown', {key: 'Enter'});
-    component.searchKeyDown(key)
+    expect(spy).toBeTruthy()
+
     // expect(component.searchKeyDown).toBeTrue();
   })
 
-  it('should return have defaultPrevented as ArrowUp' ,()=>{
+  it('should return true have defaultPrevented as ArrowUp' ,()=>{
+    const keyEvent  = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+    const spy = spyOn(keyEvent, 'preventDefault');        
+    component.searchKeyDown(keyEvent);
     fixture.detectChanges();
-    const key = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-    component.searchKeyDown(key)
-
+    expect(spy).toBeTruthy()
  })
 
   it('should cleartext in input field if button clicked', () => {

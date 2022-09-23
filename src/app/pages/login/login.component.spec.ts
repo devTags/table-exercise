@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let service: DataService;
   let location, router: Router;
-  let mockRouter;
+  let mockRouter: any
 
   let accounts: UserTable[] = [{
     "createdAt": "2023-09-11T16:00:00.000Z",
@@ -27,14 +27,37 @@ describe('LoginComponent', () => {
     "phone": "1-383-286-4225 x623",
     "jobTitle": "Direct Accountability Officer",
     "id": "2"
-  }];
+  }, {
+    "createdAt": "2023-09-11T16:00:00.000Z",
+    "password": "",
+    "name": "Mr. Nadine Klocko",
+    "address": "05212 Crist Lights",
+    "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/642.jpg",
+    "email": "Darryl1@example.com",
+    "phone": "1-383-286-4225 x623",
+    "jobTitle": "Direct Accountability Officer",
+    "id": "2"
+  }
+  ];
+  let filtered_array: UserTable[] = [{
+    "createdAt": "2023-09-11T16:00:00.000Z",
+    "password": "",
+    "name": "Mr. Nadine Klocko",
+    "address": "05212 Crist Lights",
+    "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/642.jpg",
+    "email": "Darryl1@example.com",
+    "phone": "1-383-286-4225 x623",
+    "jobTitle": "Direct Accountability Officer",
+    "id": "2"
+  }
+  ];
 
   beforeEach(async () => {
     mockRouter = { navigate: jasmine.createSpy('navigate') };
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule,
         RouterTestingModule.withRoutes(
-          [{ path: 'table', component: TableComponent }]
+          [{ path: 'table/:id', component: TableComponent }]
         )],
       providers: [DataService],
       declarations: [LoginComponent, TableComponent]
@@ -53,54 +76,6 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // it('should filter user data when submit', () => {
-  //   fixture = TestBed.createComponent(LoginComponent);
-  //   component = fixture.componentInstance;
-
-  //   spyOn(component, 'filterAccounts').and.callThrough();
-  //   const service = fixture.debugElement.injector.get(DataService)
-
-  //   component.signin();
-
-  //   spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-  // })
-  it('should return true', () => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-
-    const service = fixture.debugElement.injector.get(DataService)
-
-    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-
-
-    expect(component.signin()).toBeTruthy()
-  })
-
-
-  it('should filter user data when submit', async () => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-
-    const service = fixture.debugElement.injector.get(DataService)
-
-    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-    // expect(service.getAllUsers).toHaveBeenCalled();
-
-    // Added missed `await` keyword
-    expect(await component.getUsers()).toBeTruthy()
-  });
-
-  // it('should have password', ()=> {
-  //   spyOn(component, 'pageTransit').and.callThrough();
-  //   const service = fixture.debugElement.injector.get(DataService)
-  //   const accounts: UserTable[] = [];
-
-  //   component.signin();
-
-  //   spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
-
-  //  })
 
   // Form Group Testing
   it('check initial form values for login formgroup', async () => {
@@ -125,47 +100,67 @@ describe('LoginComponent', () => {
 
 
   it('should be valid if form value is valid', () => {
-    component.loginForm.setValue({
+    const formGroupCred = {
       "email": "bobby@bobby.com",
       "password": "Email me a soda please."
-    });
+    }
+
+    component.loginForm.setValue(formGroupCred);
 
     component.signin();
     expect(component.loginForm.valid).toBeTruthy();
   });
 
-  // it('should require valid email', () => {
-  //   expect(component.isLoggedin ).toBe(false);
 
-  //   component.loginForm.setValue({
-  //     "email": "bobby@bobby.com",
-  //     "password": "validpassword",
-  //   });
+  it('should call pageTransit if filtered account exists', () => {
 
-  //   expect(component.pageTransit).toBeTruthy();
-  // })
-
-
-  it('should pageTransit if account exists', () => {
-
-    component['pageTransit'](accounts);
-    expect(component.isLoggedin).toBeFalsy();
-  })
-
-  it('should navigate to table page when login success', async() => {
-    // fixture.whenStable().then(() => {
     jasmine.clock().install();
-    component.isLoggedin = true;
+    component.isLoggedin = false;
     component['pageTransit'](accounts);
-    spyOn(router, 'navigate').and.callThrough();
- 
-      fixture.detectChanges();
-      expect(router.navigate).toHaveBeenCalledWith(['table'], { queryParams: { accounts: "2" } });
- 
-    jasmine.clock().tick(1500);
     expect(component.isLoggedin).toBeFalsy();
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(mockRouter.navigate).toHaveBeenCalledWith([`/table/${accounts[0].id}`]);
+    });
+
+    jasmine.clock().tick(1500);
+    // expect(component.isLoggedin).toBeFalsy();
     jasmine.clock().uninstall();
     // })
+  });
+
+  it('should call getUsers when sign in', async () => {
+    const formGroupCred = {
+      "email": "bobby@bobby.com",
+      "password": "Email me a soda please."
+    }
+    // const mySpy = spyOn(component, 'pageTransit')
+    component.pageTransit(accounts)
+    component.loginForm.setValue(formGroupCred);
+
+    const service = fixture.debugElement.injector.get(DataService)
+
+    spyOn(service, 'getAllUsers').and.returnValue(of(accounts));
+
+    // component.filtered_accounts = accounts
+    // expect(service.getAllUsers).toHaveBeenCalled();
+    // spyOn(component, 'pageTransit').withArgs(of(accounts)).and.returnValue(of(accounts))
+
+    // Added missed `await` keyword
+    // expect(mySpy).toHaveBeenCalledTimes(1)
+    expect(await component.getUsers()).toBe()
+  });
+
+  it('should be called page transition', () => {
+    component.filtered_accounts = filtered_array;
+
+    spyOn(component, 'filterAccounts')
+
+
+    component.filterAccounts(filtered_array);
+    expect(component.filterAccounts.length).toBe(1)
+    // expect(component.filtered_accounts[0]).toBe(accounts)
   });
 
 });
