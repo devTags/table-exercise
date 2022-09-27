@@ -28,6 +28,7 @@
     "@angular/router": "^14.2.0",
     "@compodoc/compodoc": "^1.1.19",
     "@igniteui/material-icons-extended": "^2.10.0",
+    "@swimlane/ngx-charts": "^20.1.0",
     "@syncfusion/ej2": "^20.2.48",
     "@syncfusion/ej2-angular-buttons": "^20.2.46",
     "@syncfusion/ej2-angular-charts": "^20.2.49",

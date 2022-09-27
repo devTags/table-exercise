@@ -57,7 +57,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule,
         RouterTestingModule.withRoutes(
-          [{ path: 'table/:id', component: TableComponent }]
+          [{ path: 'main/:id', component: TableComponent }]
         )],
       providers: [DataService],
       declarations: [LoginComponent, TableComponent]
@@ -121,7 +121,7 @@ describe('LoginComponent', () => {
 
     fixture.whenStable().then(() => {
       fixture.detectChanges();
-      expect(mockRouter.navigate).toHaveBeenCalledWith([`/table/${accounts[0].id}`]);
+      expect(mockRouter.navigate).toHaveBeenCalledWith([`/main/${accounts[0].id}`]);
     });
 
     jasmine.clock().tick(1500);

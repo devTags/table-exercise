@@ -72,6 +72,22 @@ describe('DataService', () => {
   });
 
 
+  it('should fetch one user data from API via GET', () => {
+    service.getOneUser(3).subscribe(users => {
+      expect(users.length).toBe(2);
+      expect(users).toEqual(dummyUsers);
+    });
+  
+    const req = httpMock.expectOne(
+      `${service.baseUrl}getDataTable/${3}`
+    );
+    expect(req.request.method).toBe('GET');
+  
+    req.flush(dummyUsers);
+  
+    httpMock.verify();
+  });
+
 
   it('should fetch all user data from API via GET', () => {
     service.getAllUsers().subscribe(users => {
