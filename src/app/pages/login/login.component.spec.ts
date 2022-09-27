@@ -4,7 +4,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { UserTable } from 'src/app/interfaces';
+import { UserTable } from 'src/app/interfaces/users-table';
 import { DataService } from 'src/app/services/data.service';
 import { TableComponent } from '../table/table.component';
 

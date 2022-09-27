@@ -2,6 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/**
+ *@ignore
+ */
+
 export const environment = {
   production: false,
   baseUrl: 'https://631ee3db22cefb1edc3ced68.mockapi.io/',

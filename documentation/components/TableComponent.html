@@ -68,6 +68,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The header component</p>
+
+    </p>
 
 
 
@@ -129,6 +136,10 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component,  } from &#x27;@angular/core&#x27;;
 
+/**
+ * The header component
+ */
+
 @Component({
   selector: &#x27;app-table&#x27;,
   templateUrl: &#x27;./table.component.html&#x27;,
@@ -143,24 +154,17 @@ export class TableComponent{
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;header&quot;&gt;
     &lt;div class&#x3D;&quot;nav&quot;&gt;
-        &lt;div class&#x3D;&quot;title&quot;&gt;
-            &lt;p&gt;Data Table Exercise&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+        &lt;a routerLinkActive&#x3D;&quot;router-link-active&quot; routerLink&#x3D;&quot;/main/:id&quot; [routerLinkActiveOptions]&#x3D;&quot;{ exact: true }&quot;&gt;Table&lt;/a&gt;
+        &lt;a routerLinkActive&#x3D;&quot;router-link-active&quot; routerLink&#x3D;&quot;/main/:id/chart&quot; &gt;Chart&lt;/a&gt;
+      &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;body&quot;&gt;
     &lt;div&gt;
-        &lt;div class&#x3D;&quot;users&quot;&gt;
-            &lt;app-profile&gt;&lt;/app-profile&gt;
+
+        &lt;div class&#x3D;&quot;outlet&quot;&gt;
+            &lt;router-outlet&gt;&lt;/router-outlet&gt;
         &lt;/div&gt;
 
-        &lt;div class&#x3D;&quot;analytics&quot;&gt;
-            &lt;app-analytics&gt;&lt;/app-analytics&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;tables&quot;&gt;
-            &lt;app-view-table&gt;&lt;/app-view-table&gt;
-        &lt;/div&gt;
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -172,7 +176,7 @@ export class TableComponent{
                 <p class="comment">
                     <code>./table.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.header{
+                <pre class="line-numbers"><code class="language-scss">.header {
     top: 0;
     z-index: 100;
     position: sticky !important;
@@ -180,42 +184,51 @@ export class TableComponent{
     background-color: #21B539;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 10px 10px;
-    padding: 0 0 15px 15px;
+    // padding: 0 0 15px 15px;
 
-    .nav{
+    .nav {
         display: flex;
         flex-direction: row;
         align-items: center;
         color: white;
-    }
 
-    .title{
-        display: flex;
-        align-items: center;
-        
-        p{
-            font-size: 2rem;
+        a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
         }
+
+        a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
     }
 }
 
-.body{
+    .router-link-active {
+        border-radius: 0px 0px 10px 10px;
+        background-color: #177451;
+        color: white;
+    }
+
+
+
+.body {
     min-height: 100% !important;
     padding-top: 2rem;
     padding-left: 5rem;
     padding-right: 5rem;
-    background-color: #D2FEBD;
 
-    .users{
-        margin-bottom: 1.5rem;
-    }
 
-    .analytics{
-        margin-bottom: 1.5rem;
+
+    .outlet {
+        padding: 2rem;
     }
-    .tables{
-        margin-bottom: 1.5rem;
-    }
+    
 }</code></pre>
     </div>
 
@@ -244,8 +257,8 @@ export class TableComponent{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="header">    <div class="nav">        <div class="title">            <p>Data Table Exercise</p>        </div>    </div></div><div class="body">    <div>        <div class="users">            <app-profile></app-profile>        </div>        <div class="analytics">            <app-analytics></app-analytics>        </div>        <div class="tables">            <app-view-table></app-view-table>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AnalyticsComponent', 'selector': 'app-analytics'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'ViewTableComponent', 'selector': 'app-view-table'}];
+        var COMPONENT_TEMPLATE = '<div><div class="header">    <div class="nav">        <a routerLinkActive="router-link-active" routerLink="/main/:id" [routerLinkActiveOptions]="{ exact: true }">Table</a>        <a routerLinkActive="router-link-active" routerLink="/main/:id/chart" >Chart</a>      </div></div><div class="body">    <div>        <div class="outlet">            <router-outlet></router-outlet>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AnalyticsComponent', 'selector': 'app-analytics'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'ViewTableComponent', 'selector': 'app-view-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TableComponent'};
 </script>

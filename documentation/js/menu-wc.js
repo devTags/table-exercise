@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppModule.html" data-type="entity-link" >AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-0e95a0abb619d09b05d49fb3747e1075d0cc990191d4c10442bbdba2baa6427cbef3abc7bf5788815c4a07c32fa1979fa96184a15a8041b82b5a726967ae21bb"' : 'data-target="#xs-components-links-module-AppModule-0e95a0abb619d09b05d49fb3747e1075d0cc990191d4c10442bbdba2baa6427cbef3abc7bf5788815c4a07c32fa1979fa96184a15a8041b82b5a726967ae21bb"' }>
+                                            'data-target="#components-links-module-AppModule-a73bba61ce32f42651c44e21a16e2c20de26eb77e0944e80b3db178966a652540dc57ad8d02d508ec1e5760faa60b7f050a6f5cbb6d2d4a11829dff39af8fec6"' : 'data-target="#xs-components-links-module-AppModule-a73bba61ce32f42651c44e21a16e2c20de26eb77e0944e80b3db178966a652540dc57ad8d02d508ec1e5760faa60b7f050a6f5cbb6d2d4a11829dff39af8fec6"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-0e95a0abb619d09b05d49fb3747e1075d0cc990191d4c10442bbdba2baa6427cbef3abc7bf5788815c4a07c32fa1979fa96184a15a8041b82b5a726967ae21bb"' :
-                                            'id="xs-components-links-module-AppModule-0e95a0abb619d09b05d49fb3747e1075d0cc990191d4c10442bbdba2baa6427cbef3abc7bf5788815c4a07c32fa1979fa96184a15a8041b82b5a726967ae21bb"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-a73bba61ce32f42651c44e21a16e2c20de26eb77e0944e80b3db178966a652540dc57ad8d02d508ec1e5760faa60b7f050a6f5cbb6d2d4a11829dff39af8fec6"' :
+                                            'id="xs-components-links-module-AppModule-a73bba61ce32f42651c44e21a16e2c20de26eb77e0944e80b3db178966a652540dc57ad8d02d508ec1e5760faa60b7f050a6f5cbb6d2d4a11829dff39af8fec6"' }>
                                             <li class="link">
                                                 <a href="components/AnalyticsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AnalyticsComponent</a>
                                             </li>
@@ -74,9 +74,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                             <li class="link">
                                                 <a href="components/LoginComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >LoginComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/ProfileComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProfileComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/TableComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TableComponent</a>
@@ -103,40 +100,8 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <li class="link">
                                     <a href="injectables/DataService.html" data-type="entity-link" >DataService</a>
                                 </li>
-                                <li class="link">
-                                    <a href="injectables/UserService.html" data-type="entity-link" >UserService</a>
-                                </li>
                             </ul>
                         </li>
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#interfaces-links"' :
-                            'data-target="#xs-interfaces-links"' }>
-                            <span class="icon ion-md-information-circle-outline"></span>
-                            <span>Interfaces</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
-                            <li class="link">
-                                <a href="interfaces/Sale.html" data-type="entity-link" >Sale</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/UserTable.html" data-type="entity-link" >UserTable</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#miscellaneous-links"'
-                            : 'data-target="#xs-miscellaneous-links"' }>
-                            <span class="icon ion-ios-cube"></span>
-                            <span>Miscellaneous</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
-                            <li class="link">
-                                <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
-                            </li>
-                        </ul>
-                    </li>
                         <li class="chapter">
                             <a data-type="chapter-link" href="routes.html"><span class="icon ion-ios-git-branch"></span>Routes</a>
                         </li>

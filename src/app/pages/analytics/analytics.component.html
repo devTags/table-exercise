@@ -1,10 +1,12 @@
-<p-card>
-    <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title'>
-        <e-series-collection>
-            <e-series [dataSource]='chartData' type='Line' xName='month' yName='sales' name='Sales'></e-series>
-        </e-series-collection>
-    </ejs-chart>
-</p-card>
+<div class="card">
+    <div class="card-body">
+        <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title'>
+            <e-series-collection>
+                <e-series [dataSource]='chartData' type='Line' xName='month' yName='sales' name='Sales'></e-series>
+            </e-series-collection>
+        </ejs-chart>
+    </div>
+</div>
 
 
 

@@ -15,7 +15,7 @@ import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { ChartModule } from '@syncfusion/ej2-angular-charts';
 
 import {
-  CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+  BarSeriesService,StackingBarSeriesService,CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
   SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService, AccumulationChartModule
 } from '@syncfusion/ej2-angular-charts';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -40,7 +40,6 @@ import { ViewTableComponent } from './pages/table/view-table/view-table.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 
 @NgModule({
@@ -49,8 +48,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
     TableComponent,
     ViewTableComponent,
     LoginComponent,
-    ProfileComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,14 +72,14 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
     ButtonModule,
     PasswordModule,
     InputTextModule,
-    AccumulationChartModule,
     ChartModule,
     ProgressBarModule,
     ToastModule,
-    AvatarModule
+    AvatarModule,
+    AccumulationChartModule,
 
   ],
-  providers: [DateTimeService, CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
+  providers: [StackingBarSeriesService,BarSeriesService,DateTimeService, CategoryService, LineSeriesService, StepLineSeriesService, SplineSeriesService, StackingLineSeriesService, DateTimeService,
     SplineAreaSeriesService, MultiColoredLineSeriesService, ParetoSeriesService, ColumnSeriesService],
   entryComponents: [],
   schemas: [],

@@ -4,7 +4,7 @@ import { data } from '@syncfusion/ej2';
 import { GridType } from '@syncfusion/ej2/diagrams';
 import { IGridEditDoneEventArgs, IgxGridComponent, IgxPrefixModule, IRowDataEventArgs} from 'igniteui-angular';
 import { of } from 'rxjs';
-import { UserTable } from 'src/app/interfaces';
+import { UserTable } from 'src/app/interfaces/users-table';
 import { DataService } from '../../../services/data.service';
 
 import { ViewTableComponent } from './view-table.component';

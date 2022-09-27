@@ -74,8 +74,10 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { AnalyticsComponent } from &#x27;./pages/analytics/analytics.component&#x27;;
 import { LoginComponent } from &#x27;./pages/login/login.component&#x27;;
 import { TableComponent } from &#x27;./pages/table/table.component&#x27;;
+import { ViewTableComponent } from &#x27;./pages/table/view-table/view-table.component&#x27;;
 
 const routes: Routes &#x3D; [
   {path: &#x27;&#x27;, redirectTo: &#x27;login&#x27;, pathMatch: &#x27;full&#x27;},
@@ -85,8 +87,14 @@ const routes: Routes &#x3D; [
     component: LoginComponent,
   },
   {
-    path: &#x27;table/:id&#x27;,
+    path: &#x27;main/:id&#x27;,
     component: TableComponent,
+
+    children: [
+      {path: &#x27;&#x27;, component: ViewTableComponent },
+      {path: &#x27;chart&#x27;, component: AnalyticsComponent},
+      {path: &#x27;&#x27;, redirectTo: &#x27;&#x27;, pathMatch: &#x27;full&#x27;},
+    ]
   },
 ];
 

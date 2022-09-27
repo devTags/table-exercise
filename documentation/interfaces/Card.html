@@ -47,7 +47,7 @@
   <li>Interfaces</li>
   <li
   >
-  UserTable</li>
+  Card</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/interfaces/users-table.ts</code>
+            <code>src/app/interfaces/cards.ts</code>
         </p>
 
 
@@ -84,57 +84,39 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#address" 
+                                        <a href="#cardholdername" 
 >
-                                            address
+                                            cardholdername
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#createdAt" 
+                                        <a href="#cardNumber" 
 >
-                                            createdAt
+                                            cardNumber
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#email" 
+                                        <a href="#cvc" 
 >
-                                            email
+                                            cvc
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#expiryMonth" 
+>
+                                            expiryMonth
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#expiryYear" 
+>
+                                            expiryYear
                                         </a>
                                 </li>
                                 <li>
                                         <a href="#id" 
 >
                                             id
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#image" 
->
-                                            image
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#jobTitle" 
->
-                                            jobTitle
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#name" 
->
-                                            name
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#password" 
->
-                                            password
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#phone" 
->
-                                            phone
                                         </a>
                                 </li>
                             </ul>
@@ -152,9 +134,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="address"></a>
-                                        <span class="name "><b>address</b>
-                                            <a href="#address">
+                                        <a name="cardholdername"></a>
+                                        <span class="name "><b>cardholdername</b>
+                                            <a href="#cardholdername">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -162,7 +144,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>cardholdername:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -185,9 +167,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="createdAt"></a>
-                                        <span class="name "><b>createdAt</b>
-                                            <a href="#createdAt">
+                                        <a name="cardNumber"></a>
+                                        <span class="name "><b>cardNumber</b>
+                                            <a href="#cardNumber">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -195,7 +177,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>createdAt:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>cardNumber:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -218,9 +200,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="email"></a>
-                                        <span class="name "><b>email</b>
-                                            <a href="#email">
+                                        <a name="cvc"></a>
+                                        <span class="name "><b>cvc</b>
+                                            <a href="#cvc">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -228,7 +210,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>cvc:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -236,7 +218,73 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="expiryMonth"></a>
+                                        <span class="name "><b>expiryMonth</b>
+                                            <a href="#expiryMonth">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>expiryMonth:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="expiryYear"></a>
+                                        <span class="name "><b>expiryYear</b>
+                                            <a href="#expiryYear">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>expiryYear:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -280,189 +328,19 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="image"></a>
-                                        <span class="name "><b>image</b>
-                                            <a href="#image">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>image:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="jobTitle"></a>
-                                        <span class="name "><b>jobTitle</b>
-                                            <a href="#jobTitle">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>jobTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="name"></a>
-                                        <span class="name "><b>name</b>
-                                            <a href="#name">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="password"></a>
-                                        <span class="name "><b>password</b>
-                                            <a href="#password">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>password:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="phone"></a>
-                                        <span class="name "><b>phone</b>
-                                            <a href="#phone">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>phone:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface UserTable {
-    createdAt: string
-    password: string
-    name: string
-    address: string
-    image: string
-    email: string
-    phone: string
-    jobTitle: string
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Card {
     id: string
-  }
-  
-
+    cardholdername: string
+    cardNumber: string
+    expiryMonth: number
+    expiryYear: number
+    cvc: number
+}
 </code></pre>
     </div>
 </div>
@@ -500,7 +378,7 @@
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'UserTable.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Card.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

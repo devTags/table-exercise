@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { DataService } from './data.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { HttpClientModule, HttpRequest, HttpResponse } from '@angular/common/http';
-import { UserTable } from '../interfaces';
+import { UserTable } from '../interfaces/users-table';
 import { Sale } from '../interfaces/sales';
 
 describe('DataService', () => {

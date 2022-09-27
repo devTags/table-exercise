@@ -1,3 +1,8 @@
+/**
+ * @ignore
+ */
+
+
 export interface UserTable {
     createdAt: string
     password: string

@@ -1,5 +1,9 @@
 import { Component,  } from '@angular/core';
 
+/**
+ * The header component
+ */
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',

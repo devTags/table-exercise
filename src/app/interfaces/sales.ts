@@ -1,3 +1,7 @@
+/**
+ * @ignore
+ */
+
 export interface Sale {
   createdAt: string
   month: string
